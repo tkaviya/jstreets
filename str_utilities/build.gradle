@@ -1,0 +1,24 @@
+description = 'Streets Utilities'
+
+jar { baseName = 'str_utilities' }
+
+apply plugin: 'idea'
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+idea { module { scopes.PROVIDED.plus += [ configurations.provided] } }
+
+dependencies {
+    provided project(':str_common')
+    provided project(':str_persistence')
+    compile libraries.javax_mail
+    compile libraries.spring_context
+}

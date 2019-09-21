@@ -1,0 +1,35 @@
+description = 'Streets Core'
+
+jar { baseName = 'str_core' }
+
+apply plugin: 'idea'
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+idea { module { scopes.PROVIDED.plus += [ configurations.provided] } }
+
+dependencies {
+
+    provided project(':str_common')
+    provided project(':str_persistence')
+    provided project(':str_utilities')
+    provided project(':str_authentication')
+
+    testCompile project(':str_common').sourceSets.test.output
+    testCompile project(':str_persistence').sourceSets.test.output
+    testCompile project(':str_authentication').sourceSets.test.output
+
+    compile libraries.spring_core
+
+    testCompile libraries.testng
+	testCompile libraries.jmockit
+	testCompile libraries.spring_test
+}

@@ -1,0 +1,40 @@
+description = 'Streets Persistence'
+
+jar { baseName = 'str_persistence' }
+
+apply plugin: 'idea'
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+idea { module { scopes.PROVIDED.plus += [ configurations.provided] } }
+
+dependencies {
+
+    provided project(':str_common')
+    testCompile project(':str_common').sourceSets.test.output
+
+    provided libraries.hibernate_core
+    provided libraries.hibernate_validator
+    provided libraries.hibernate_entitymanager
+
+	compile libraries.mysql_connector
+	compile libraries.spring_context
+	compile libraries.spring_orm
+	compile libraries.spring_data_jpa
+	compile libraries.commons_logging
+	compile libraries.hibernate_c3p0
+
+    testCompile libraries.testng
+    testCompile libraries.jmockit
+    testCompile libraries.spring_test
+
+}
+

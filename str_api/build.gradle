@@ -1,0 +1,32 @@
+description = 'Streets API'
+
+jar { baseName = 'str_api' }
+
+apply plugin: 'war'
+apply plugin: 'idea'
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+idea { module { scopes.PROVIDED.plus += [ configurations.provided] } }
+
+dependencies {
+
+    provided project(':str_common')
+    provided project(':str_persistence')
+    provided project(':str_utilities')
+    provided project(':str_authentication')
+    provided project(':str_core')
+
+    testCompile project(':str_common').sourceSets.test.output
+    testCompile project(':str_persistence').sourceSets.test.output
+    testCompile project(':str_authentication').sourceSets.test.output
+    testCompile project(':str_core').sourceSets.test.output
+}

@@ -1,0 +1,9 @@
+rootProject.name = 'JStreets'
+
+include ':str_common'
+include ':str_persistence'
+include ':str_utilities'
+include ':str_authentication'
+include ':str_core'
+include ':str_api'
+include ':str_web'
