@@ -37,17 +37,17 @@ public class DaoManager {
         return daoManager;
     }
 
-//    public static StrAuthUserDao getAuthUserDao() {
-//        return getInstance().authUserDao;
-//    }
+    public static StrAuthUserDao getAuthUserDao() {
+        return getInstance().authUserDao;
+    }
 
     public static StrConfigDao getStrConfigDao() {
         return getInstance().strConfigDao;
     }
 
-//    private static StrGroupRoleDao getUserGroupRoleDao() {
-//        return getInstance().groupRoleDao;
-//    }
+    private static StrGroupRoleDao getUserGroupRoleDao() {
+        return getInstance().groupRoleDao;
+    }
 
     public static EntityManagerRepo getEntityManagerRepo() {
         return getInstance().entityManagerRepo;

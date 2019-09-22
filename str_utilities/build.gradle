@@ -20,5 +20,4 @@ dependencies {
     provided project(':str_common')
     provided project(':str_persistence')
     compile libraries.javax_mail
-    compile libraries.spring_context
 }

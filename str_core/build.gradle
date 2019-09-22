@@ -25,10 +25,13 @@ dependencies {
 
     testCompile project(':str_common').sourceSets.test.output
     testCompile project(':str_persistence').sourceSets.test.output
+    testCompile project(':str_utilities').sourceSets.test.output
     testCompile project(':str_authentication').sourceSets.test.output
 
     compile libraries.spring_core
-
+    compile libraries.axis2_jaxws
+    compile libraries.modelmapper
+    
     testCompile libraries.testng
 	testCompile libraries.jmockit
 	testCompile libraries.spring_test

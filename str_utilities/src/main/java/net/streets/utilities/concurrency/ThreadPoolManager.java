@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Integer.parseInt;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static net.streets.common.enumeration.StrConfig.CONFIG_THREAD_CORE_POOL_SIZE;
-import static net.streets.common.enumeration.StrConfig.CONFIG_THREAD_MAX_POOL_SIZE;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_THREAD_CORE_POOL_SIZE;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_THREAD_MAX_POOL_SIZE;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
 
 /**

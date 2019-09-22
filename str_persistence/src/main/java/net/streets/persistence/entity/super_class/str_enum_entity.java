@@ -19,14 +19,14 @@ public abstract class str_enum_entity<E extends str_enum_entity> extends str_ent
 
     @Basic
     @Column(nullable = false, columnDefinition = "bit default true")
-    protected Boolean isEnabled = true;
+    protected Boolean is_enabled = true;
 
     public str_enum_entity() {
     }
 
-    public str_enum_entity(String name, Boolean isEnabled) {
+    public str_enum_entity(String name, Boolean is_enabled) {
         this.name = name;
-        this.isEnabled = isEnabled;
+        this.is_enabled = is_enabled;
     }
 
     public String getName() {
@@ -39,12 +39,12 @@ public abstract class str_enum_entity<E extends str_enum_entity> extends str_ent
         this.name = name;
     }
 
-    public Boolean getIsEnabled() {
-        return isEnabled;
+    public Boolean getIs_enabled() {
+        return is_enabled;
     }
 
-    public void setIsEnabled(Boolean enabled) {
-        this.isEnabled = enabled;
+    public void setIs_enabled(Boolean enabled) {
+        this.is_enabled = enabled;
     }
 
     @Override

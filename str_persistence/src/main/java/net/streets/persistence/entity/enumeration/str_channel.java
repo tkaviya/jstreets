@@ -2,7 +2,10 @@ package net.streets.persistence.entity.enumeration;
 
 import net.streets.persistence.entity.super_class.str_enum_entity;
 
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,24 +18,10 @@ import javax.persistence.*;
 @Cacheable
 public class str_channel extends str_enum_entity<str_channel> {
 
-    @Basic
-    @Column(nullable = false, updatable = false, columnDefinition = "bit default false")
-    private Boolean is_pin_based;
-
     public str_channel() {
     }
 
-    public str_channel(String name, Boolean enabled, Boolean is_pin_based) {
+    public str_channel(String name, Boolean enabled) {
         super(name, enabled);
-        this.is_pin_based = is_pin_based;
     }
-
-    public Boolean is_pin_based() {
-        return is_pin_based;
-    }
-
-    public void setIs_pin_based(Boolean is_pin_based) {
-        this.is_pin_based = is_pin_based;
-    }
-
 }

@@ -13,7 +13,7 @@ import java.io.File;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import static net.streets.common.enumeration.StrConfig.*;
+import static net.streets.persistence.enumeration.StrConfig.*;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
 
 public class EMailer implements Runnable {

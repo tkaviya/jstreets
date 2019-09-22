@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:head>
+    <title>#{systemSettings.systemName} Control Center - Admin</title>
+    <h:outputStylesheet library="css" name="style.css"  />
+    <link rel="icon" type="image/x-icon" href="resources/images/#{systemSettings.systemNameToLower}/favicon.ico"/>
+</h:head>
+
+<h:body>
+    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+        <p:graphicImage url="resources/images/ajaxloadingbar.gif" />
+    </p:dialog>
+    <div id="pageData" class="centerAlign" style="width: 90%;">
+
+        <h:form id="pageHeader">
+            <p:panel header="#{systemSettings.systemName} Control Center" style="margin-bottom: 10px;">
+                <table width="100%" style="table-layout: fixed">
+                    <tr valign="top">
+                        <td valign="top" class="leftAlign">
+                            <table width="100%">
+                                <tr><td>Welcome #{sessionBean.streetsAuthUser.user.first_name} #{sessionBean.streetsAuthUser.user.last_name} #{sessionBean.streetsAuthUser.auth_group.name}</td></tr>
+                                <tr><td>Last login: #{sessionBean.streetsAuthUser.last_login_date}</td></tr>
+                            </table>
+                        </td>
+                        <td valign="top" class="rightAlign" style="vertical-align: top">
+                            <p:commandButton action="#{sessionBean.logout}" style="vertical-align: top" value="Logout" styleClass="rightAlign"
+                                      onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+                        </td>
+                    </tr>
+                </table>
+            </p:panel>
+        </h:form>
+        <div id="pageMenu" class="centerAlign" style="width: 20%; float: left">
+            <h:form>
+                <f:ajax render=":dataDiv" execute="@this">
+                    <p:panelMenu id="vpPanelMenu" style="width:90%; float: left; text-align: left" >
+                        <p:submenu label="EVD Configuration" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_EVD')}">
+                            <p:menuitem value="System Summary" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_STOCK')}" action="#{sessionBean.changeDisplay('summary')}" ajax="false" icon="ui-icon-tag" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
+                        <p:submenu label="User Management" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}">
+                            <p:menuitem value="User Details" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}" action="#{sessionBean.changeDisplay('userEdit')}" ajax="false" icon="ui-icon-person" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:menuitem value="User Authentication" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}" action="#{sessionBean.changeDisplay('auEdit')}" ajax="false" icon="ui-icon-locked" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
+                        <p:submenu label="System Reports" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_REPORTS')}">
+                            <p:menuitem value="Logins" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_AUTHENTICATION_REPORTS')}" action="#{sessionBean.changeDisplay('authReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:menuitem value="System" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SYSTEM_REPORTS')}" action="#{sessionBean.changeDisplay('sysReport')}" ajax="false" icon="ui-icon-clock" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
+                        <p:submenu label="My Reports" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SINGLE_REPORTS')}">
+                            <p:menuitem value="My Login Report" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SINGLE_AUTHENTICATION_REPORTS')}" action="#{sessionBean.changeDisplay('sAuthReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
+                        <p:submenu label="My Settings" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_SETTINGS')}">
+                            <p:menuitem value="Account Settings" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_SETTINGS')}" action="#{sessionBean.changeDisplay('uSettings')}" ajax="false" icon="ui-icon-wrench" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
+                        <p:separator />
+                    </p:panelMenu>
+                </f:ajax>
+            </h:form>
+        </div>
+
+        <div style="width: 80%; float: right" >
+            <p:messages id="msgs" autoUpdate="true" showSummary="false" showDetail="true" closable="true"/>
+            <div id="dataDiv">
+                <ui:include src="/resources/pages/#{sessionBean.currentPage.includeXHTML}" />
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

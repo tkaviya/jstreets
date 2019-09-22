@@ -1,9 +1,9 @@
 package net.streets.persistence.dao;
 
-import net.streets.common.enumeration.StrResponseCode;
-import net.streets.common.response.StrResponseObject;
 import net.streets.common.structure.Pair;
 import net.streets.persistence.entity.super_class.str_entity;
+import net.streets.persistence.enumeration.StrResponseCode;
+import net.streets.persistence.enumeration.StrResponseObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

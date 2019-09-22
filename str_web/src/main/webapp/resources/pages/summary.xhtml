@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="voucherStockForm" rendered="#{sessionBean.isCurrentPage('summary')}" layout="block">
+
+    <f:facet name="header">System Statistics</f:facet>
+    <table style="width:100%; vertical-align: top; text-align: center; border-width: 1px;">
+        <f:facet name="header">System Summary</f:facet>
+        <tr valign="top">
+            <td valign="top">
+                <p:panel id="errors" closable="true" header="Errors"
+                         style="text-align: left; margin-right: 10px; margin-left: 10px;margin-bottom: 10px">
+                    <h:outputText value="Total Errors Today: #{summaryBean.totalErrorsToday}" /><br/>
+                    <h:outputText value="System Errors Today: #{summaryBean.systemErrorsToday}" />
+                </p:panel>
+            </td>
+            <td valign="top">
+                <p:panel id="systemUsers" closable="true" header="Users"  style="text-align: left; margin-bottom: 10px">
+                    <h:outputText value="Total Registered Users: #{summaryBean.totalUsers}" />
+                </p:panel>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+</h:form>
+</html>

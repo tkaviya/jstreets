@@ -34,8 +34,8 @@ public class EnumEntityRepoManager {
         if (results.size() > 0) {
             if (ENUM_ENTITY_CACHE.get(entityClass.getSimpleName()) == null) {
                 HashMap<String, str_enum_entity> cachedValues = new HashMap<>();
-                for (str_enum_entity symEnumEntity : results) {
-                    cachedValues.put(symEnumEntity.getName(), symEnumEntity);
+                for (str_enum_entity strEnumEntity : results) {
+                    cachedValues.put(strEnumEntity.getName(), strEnumEntity);
                 }
                 ENUM_ENTITY_CACHE.put(entityClass.getSimpleName(), cachedValues);
             }

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="userSettingsForm" rendered="#{sessionBean.isCurrentPage('uSettings')}" layout="block">
+    <f:passThroughAttribute name="autocomplete" value="off"/>
+    <p:defaultCommand target="btnChangePassword" />
+    <p:panel header="Change Login Password">
+        <h:panelGrid id="userSettingsPanel" columns="3" styleClass="centerAlign">
+            <p:spacer/><p:spacer/><p:spacer/>
+
+            <p:outputLabel for="oldPin" value="Old Password:" styleClass="leftAlign"/>
+            <p:password id="oldPin" value="#{userSettingsBean.newCredentials.oldPin}" required="true" styleClass="inputField">
+                <f:validator validatorId="custom.passwordValidator"  />
+            </p:password>
+            <p:message for="oldPin" id="msgOldPassword" display="icon" styleClass="rightAlign"/>
+
+            <p:outputLabel for="newPin" value="New Password:" styleClass="leftAlign"/>
+            <p:password id="newPin" value="#{userSettingsBean.newCredentials.newPin}" required="true" styleClass="inputField">
+                <f:validator validatorId="custom.passwordValidator"  />
+            </p:password>
+            <p:message for="newPin" id="msgNewPassword" display="icon" styleClass="rightAlign"/>
+
+            <p:outputLabel for="confirmNewPassword" value="Confirm New Password:" styleClass="leftAlign" style="width: 200px"/>
+            <p:password id="confirmNewPassword" value="#{userSettingsBean.newCredentials.newConfirmPin}" required="true" styleClass="inputField">
+                <f:validator validatorId="custom.passwordValidator"  />
+            </p:password>
+            <p:message for="confirmNewPassword" id="msgConfirmNewPassword" display="icon" styleClass="rightAlign"/>
+
+            <p:spacer/><p:spacer/><p:spacer/>
+            <p:spacer/>
+            <p:commandButton id="btnChangePassword" action="#{userSettingsBean.changePassword}" value="Change Password" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"
+                             icon="ui-icon-triangle-1-e" ajax="true" styleClass="rightAlign" update="userSettingsForm"/>
+            <p:spacer/>
+
+        </h:panelGrid>
+    </p:panel>
+
+</h:form>
+
+</html>

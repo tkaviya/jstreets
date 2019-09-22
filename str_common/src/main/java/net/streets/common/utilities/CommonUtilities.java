@@ -1,19 +1,13 @@
 package net.streets.common.utilities;
 
-import net.streets.common.response.StrResponseObject;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.lang.Math.abs;
-import static java.lang.String.format;
-import static net.streets.common.enumeration.StrResponseCode.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -241,35 +235,35 @@ public class CommonUtilities {
         return '/' + regex + '/';
     }
 
-    public static StrResponseObject<String> getValueByStringPattern(String inputString, String inputPattern, int group) {
-        try {
-
-            logger.info(format("Getting value by pattern %s", inputPattern));
-            logger.info(format("Group = %d. Input string = %s", group, inputString));
-
-            //process string for data
-            if (inputPattern == null) {
-                logger.severe("Regex required to parse inputString");
-                return new StrResponseObject<String>(GENERAL_ERROR)
-                        .setMessage(format("Regex required to parse inputString %s", inputString));
-            }
-            if (inputString == null) {
-                logger.severe("inputString was not supplied for processing");
-                return new StrResponseObject<String>(GENERAL_ERROR)
-                        .setMessage("inputString was not supplied for processing");
-            }
-            Pattern pattern = Pattern.compile(inputPattern);
-            Matcher matcher = pattern.matcher(inputString);
-            if (!matcher.find()) {
-                logger.warning(format("Regex pattern could not find value in inputString %s", inputString));
-                return new StrResponseObject<>(DATA_NOT_FOUND);
-            }
-            return new StrResponseObject<>(SUCCESS, matcher.group(group));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new StrResponseObject<String>(GENERAL_ERROR).setMessage(ex.getMessage());
-        }
-    }
+//    public static StrResponseObject<String> getValueByStringPattern(String inputString, String inputPattern, int group) {
+//        try {
+//
+//            logger.info(format("Getting value by pattern %s", inputPattern));
+//            logger.info(format("Group = %d. Input string = %s", group, inputString));
+//
+//            //process string for data
+//            if (inputPattern == null) {
+//                logger.severe("Regex required to parse inputString");
+//                return new StrResponseObject<String>(GENERAL_ERROR)
+//                        .setMessage(format("Regex required to parse inputString %s", inputString));
+//            }
+//            if (inputString == null) {
+//                logger.severe("inputString was not supplied for processing");
+//                return new StrResponseObject<String>(GENERAL_ERROR)
+//                        .setMessage("inputString was not supplied for processing");
+//            }
+//            Pattern pattern = Pattern.compile(inputPattern);
+//            Matcher matcher = pattern.matcher(inputString);
+//            if (!matcher.find()) {
+//                logger.warning(format("Regex pattern could not find value in inputString %s", inputString));
+//                return new StrResponseObject<>(DATA_NOT_FOUND);
+//            }
+//            return new StrResponseObject<>(SUCCESS, matcher.group(group));
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            return new StrResponseObject<String>(GENERAL_ERROR).setMessage(ex.getMessage());
+//        }
+//    }
 
     public static Throwable getRealThrowable(Throwable throwable) {
         Throwable cause = throwable;

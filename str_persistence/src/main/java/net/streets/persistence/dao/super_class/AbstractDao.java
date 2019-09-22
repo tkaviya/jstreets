@@ -1,9 +1,9 @@
 package net.streets.persistence.dao.super_class;
 
-import net.streets.common.enumeration.StrResponseCode;
-import net.streets.common.response.StrResponseObject;
 import net.streets.common.structure.Pair;
 import net.streets.persistence.entity.super_class.str_entity;
+import net.streets.persistence.enumeration.StrResponseCode;
+import net.streets.persistence.enumeration.StrResponseObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +46,7 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
 
             if (entityManagerFactory == null) {
                 LOGGER.info("@PersistenceUnit entityManagerFactory is null. Using raw filename");
-                entityManagerFactory = Persistence.createEntityManagerFactory("symPersistence");
+                entityManagerFactory = Persistence.createEntityManagerFactory("strPersistence");
             }
 
             LOGGER.info("Creating entity manager from entityManagerFactory");

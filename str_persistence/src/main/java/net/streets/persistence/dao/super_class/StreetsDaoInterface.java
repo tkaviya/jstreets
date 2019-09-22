@@ -1,8 +1,8 @@
 package net.streets.persistence.dao.super_class;
 
-import net.streets.common.response.StrResponseObject;
 import net.streets.common.structure.Pair;
 import net.streets.persistence.entity.super_class.str_entity;
+import net.streets.persistence.enumeration.StrResponseObject;
 
 import java.io.Serializable;
 import java.util.List;

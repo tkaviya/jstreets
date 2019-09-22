@@ -20,6 +20,11 @@ dependencies {
     provided project(':str_common')
     provided project(':str_persistence')
     provided project(':str_utilities')
+    
     testCompile project(':str_persistence').sourceSets.test.output
     testCompile project(':str_common').sourceSets.test.output
+    testCompile project(':str_utilities').sourceSets.test.output
+    
+    testCompile libraries.testng
+
 }

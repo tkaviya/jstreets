@@ -1,6 +1,7 @@
 package net.streets.persistence.entity.super_class;
 
 import net.streets.common.interfaces.PrintableStringClass;
+import net.streets.persistence.helper.DaoManager;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,19 +40,19 @@ public abstract class str_entity<E extends str_entity> implements Serializable, 
         return this.toPrintableString();
     }
 
-//    public E save() {
-//        if (id != null) {
-//            return DaoManager.getEntityManagerRepo().saveOrUpdate(this);
-//        }
-//        return DaoManager.getEntityManagerRepo().save(this);
-//    }
-//
-//    public E refresh() {
-//        DaoManager.getEntityManagerRepo().refresh(this);
-//        return (E) this;
-//    }
-//
-//    public void delete() {
-//        DaoManager.getEntityManagerRepo().delete(this);
-//    }
+    public E save() {
+        if (id != null) {
+            return DaoManager.getEntityManagerRepo().saveOrUpdate(this);
+        }
+        return DaoManager.getEntityManagerRepo().save(this);
+    }
+
+    public E refresh() {
+        DaoManager.getEntityManagerRepo().refresh(this);
+        return (E) this;
+    }
+
+    public void delete() {
+        DaoManager.getEntityManagerRepo().delete(this);
+    }
 }

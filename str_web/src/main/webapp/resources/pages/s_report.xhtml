@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="sysDateForm" rendered="#{sessionBean.isCurrentPage('sysReport')}" layout="block">
+    <p:panel header="Select Reporting Period" style="margin-bottom:10px; width: 100%">
+        <h:panelGrid columns="4" cellpadding="5" style="width: 100%">
+            <p:outputLabel for="reportStartDate" value="Report Start Date:" />
+            <p:calendar id="reportStartDate" value="#{systemReportBean.reportStartDate}"
+                        pattern="MM/dd/yyyy HH:mm:ss" navigator="true">
+                <p:ajax event="dateSelect" listener="#{systemReportBean.initializeSystemLogs}" update=":systemReportForm"
+                        onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+            </p:calendar>
+
+            <p:outputLabel for="reportEndDate" value="Report End Date:" />
+            <p:calendar id="reportEndDate" value="#{systemReportBean.reportEndDate}"
+                        pattern="MM/dd/yyyy HH:mm:ss" navigator="true">
+                <p:ajax event="dateSelect" listener="#{systemReportBean.initializeSystemLogs}" update=":systemReportForm"
+                        onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+            </p:calendar>
+        </h:panelGrid>
+    </p:panel>
+</h:form>
+
+
+<h:form id="systemReportForm" rendered="#{sessionBean.isCurrentPage('sysReport')}" layout="block">
+    <p:dataTable id="systemLogsTable" var="log" value="#{systemReportBean.systemLogs}" draggableColumns="true"
+                 resizableColumns="true" widgetVar="cellSystemLogs" tableStyle="width:auto"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" pageLinks="5" rows="20" style="margin-bottom:20px">
+        <f:facet name="header">
+            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+            <p:columnToggler datasource="systemLogsTable" trigger="toggler" />
+            #{systemReportBean.tableDescription}<br/><br/>
+        </f:facet>
+
+        <ui:include src="includes/exporters.xhtml">
+            <ui:param name="backingBean" value="#{systemReportBean}" />
+            <ui:param name="tableName" value="systemLogsTable" />
+        </ui:include>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_ID}" sortBy="#{log.id}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_ID}"/>
+            </f:facet>
+            <h:outputText value="#{log.id}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_EVENT_TYPE}" sortBy="#{log.event_type.name}" filterBy="#{log.event_type.name}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_EVENT_TYPE}"/>
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellSystemLogs').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.eventTypes}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{log.event_type.name}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_REQUEST_TIME}" sortBy="#{log.incoming_request_time}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_REQUEST_TIME}"/>
+            </f:facet>
+            <h:outputText value="#{log.incoming_request_time}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_USERNAME}" sortBy="#{log.system_user.username}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_USERNAME}"/>
+            </f:facet>
+            <h:outputText value="#{log.system_user.username}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_STATUS}" sortBy="#{log.response_code.name}" filterBy="#{log.response_code.name}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_STATUS}"/>
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellSystemLogs').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.logStatuses}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{log.response_code.name}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_REQUEST}" sortBy="#{log.incoming_request}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_REQUEST}"/>
+            </f:facet>
+            <h:outputText value="#{log.incoming_request}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_RESPONSE}" sortBy="#{log.outgoing_response}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_RESPONSE}"/>
+            </f:facet>
+            <h:outputText value="#{log.outgoing_response}" />
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_RESPONSE_TIME}" sortBy="#{log.outgoing_response_time}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_RESPONSE_TIME}"/>
+            </f:facet>
+            <h:outputText value="#{log.outgoing_response_time}" />
+        </p:column>
+
+    </p:dataTable>
+
+</h:form>
+
+</html>

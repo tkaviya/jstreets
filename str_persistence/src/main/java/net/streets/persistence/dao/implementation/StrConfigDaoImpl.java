@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static java.lang.String.format;
-import static net.streets.common.enumeration.StrConfig.CONFIG_CONFIG_UPDATE_DURATION;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_CONFIG_UPDATE_DURATION;
 
 /***************************************************************************
  *                                                                         *
@@ -39,14 +39,14 @@ public class StrConfigDaoImpl extends StrEnumEntityDaoImpl<str_config, Long> imp
             configMap = new HashMap<>();
 
             //get all configs from database
-            List<str_config> symConfigs = findAll();
+            List<str_config> strConfigs = findAll();
 
             //add all configs to memory for future use
-            for (str_config symConfig : symConfigs) {
+            for (str_config strConfig : strConfigs) {
                 logger.info(format("Loading config '%s' with value '%s'",
-                        symConfig.getName(),
-                        symConfig.getConfig_value()));
-                configMap.put(symConfig.getName(), symConfig.getConfig_value());
+                        strConfig.getName(),
+                        strConfig.getConfig_value()));
+                configMap.put(strConfig.getName(), strConfig.getConfig_value());
             }
 
             //if config update duration has changed, get the new value

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="authDateForm" rendered="#{sessionBean.isCurrentPage('authReport')}" layout="block">
+    <p:panel header="Select Reporting Period" style="margin-bottom:10px; width: 100%">
+        <h:panelGrid columns="4" cellpadding="5" style="width: 100%">
+            <p:outputLabel for="reportStartDate" value="Report Start Date:" />
+            <p:calendar id="reportStartDate" value="#{authReportBean.reportStartDate}"
+                        pattern="MM/dd/yyyy HH:mm:ss" navigator="true">
+                <p:ajax event="dateSelect" listener="#{authReportBean.initializeSessions}" update=":authenticationReportForm"
+                        onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+            </p:calendar>
+
+            <p:outputLabel for="reportEndDate" value="Report End Date:" />
+            <p:calendar id="reportEndDate" value="#{authReportBean.reportEndDate}"
+                        pattern="MM/dd/yyyy HH:mm:ss" navigator="true">
+                <p:ajax event="dateSelect" listener="#{authReportBean.initializeSessions}" update=":authenticationReportForm"
+                        onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+            </p:calendar>
+        </h:panelGrid>
+    </p:panel>
+</h:form>
+
+
+<h:form id="authenticationReportForm" rendered="#{sessionBean.isCurrentPage('authReport')}" layout="block">
+    <p:dataTable id="authenticationTable" var="reg" value="#{authReportBean.sessions}" draggableColumns="true"
+                 resizableColumns="true" editMode="cell" widgetVar="cellSessions" tableStyle="width:auto"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" pageLinks="5" rows="20" style="margin-bottom:20px">
+        <f:facet name="header">
+            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+            <p:columnToggler datasource="authenticationTable" trigger="toggler" />
+            #{authReportBean.tableDescription}<br/><br/>
+        </f:facet>
+
+        <ui:include src="includes/exporters.xhtml">
+            <ui:param name="backingBean" value="#{authReportBean}" />
+            <ui:param name="tableName" value="authenticationTable" />
+        </ui:include>
+
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_ID}" sortBy="#{reg.id}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_ID}"/>
+            </f:facet>
+            <h:outputText value="#{reg.id}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_USERNAME}" sortBy="#{reg.auth_user.user.username}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_USERNAME}"/>
+            </f:facet>
+            <h:outputText value="#{reg.auth_user.user.username}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_START_TIME}" sortBy="#{reg.start_time}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_START_TIME}"/>
+            </f:facet>
+            <h:outputText value="#{reg.start_time}" />
+        </p:column>
+
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_END_TIME}" sortBy="#{reg.end_time}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_END_TIME}"/>
+            </f:facet>
+            <h:outputText value="#{reg.end_time}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_CHANNEL}" sortBy="#{reg.auth_user.channel.name}" filterBy="#{reg.auth_user.channel}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_CHANNEL}"/>
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellSessions').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.channels}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{reg.auth_user.channel.name}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_DEVICE_ID}" sortBy="#{reg.device_id}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_DEVICE_ID}"/>
+            </f:facet>
+            <h:outputText value="#{reg.device_id}" />
+        </p:column>
+
+    </p:dataTable>
+
+</h:form>
+
+</html>

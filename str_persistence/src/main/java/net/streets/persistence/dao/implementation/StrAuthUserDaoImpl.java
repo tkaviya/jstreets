@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static net.streets.common.enumeration.StrResponseCode.ACC_ACTIVE;
 import static net.streets.persistence.dao.EnumEntityRepoManager.findByName;
+import static net.streets.persistence.enumeration.StrResponseCode.ACC_ACTIVE;
 import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
 
 /**

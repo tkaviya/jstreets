@@ -4,8 +4,8 @@ import java.util.logging.Logger;
 
 import static java.lang.Long.parseLong;
 import static java.lang.String.format;
-import static net.streets.common.enumeration.StrConfig.CONFIG_MUTEX_LOCK_WAIT_INTERVAL;
-import static net.streets.common.enumeration.StrConfig.CONFIG_MUTEX_LOCK_WAIT_TIME;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_MUTEX_LOCK_WAIT_INTERVAL;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_MUTEX_LOCK_WAIT_TIME;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
 
 /**

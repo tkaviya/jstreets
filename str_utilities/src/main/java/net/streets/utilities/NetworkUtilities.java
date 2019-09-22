@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static net.streets.common.enumeration.StrConfig.CONFIG_EMAIL_ALERT_TO;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_EMAIL_ALERT_TO;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
 import static net.streets.utilities.mail.EMailer.DEFAULT_CONTENT_TYPE;
 
@@ -51,22 +51,22 @@ public class NetworkUtilities {
         }
     }
 
-    public static void sendEmailAlert(String symSystem, String alertSubject, String alertMessage) {
-        logger.info("Sending alert email from " + symSystem + " with subject: " + alertSubject);
+    public static void sendEmailAlert(String strSystem, String alertSubject, String alertMessage) {
+        logger.info("Sending alert email from " + strSystem + " with subject: " + alertSubject);
         logger.info(alertMessage);
         ThreadPoolManager.schedule(new EMailer(
                 new String[]{getStrConfigDao().getConfig(CONFIG_EMAIL_ALERT_TO)},
-                symSystem + " alert! " + alertSubject, alertMessage, DEFAULT_CONTENT_TYPE));
+                strSystem + " alert! " + alertSubject, alertMessage, DEFAULT_CONTENT_TYPE));
     }
 
-    public static void sendEmail(String symSystem, String recipient, String emailSubject, String emailMessage) {
-        logger.info("Sending email from " + symSystem + " with subject: " + emailSubject);
+    public static void sendEmail(String strSystem, String recipient, String emailSubject, String emailMessage) {
+        logger.info("Sending email from " + strSystem + " with subject: " + emailSubject);
         ThreadPoolManager.schedule(new EMailer(new String[]{recipient}, emailSubject, emailMessage, DEFAULT_CONTENT_TYPE));
     }
 
-    public static void sendEmail(String symSystem, String[] recipients, String emailSubject, String emailMessage,
+    public static void sendEmail(String strSystem, String[] recipients, String emailSubject, String emailMessage,
                                  String contentType) {
-        logger.info("Sending email from " + symSystem + " with subject: " + emailSubject);
+        logger.info("Sending email from " + strSystem + " with subject: " + emailSubject);
         ThreadPoolManager.schedule(new EMailer(recipients, emailSubject, emailMessage, contentType));
     }
 }

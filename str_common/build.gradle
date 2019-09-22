@@ -18,9 +18,7 @@ idea { module { scopes.PROVIDED.plus += [ configurations.provided] } }
 
 dependencies {
     compile libraries.commons_codec
-    compile libraries.gson
     compile libraries.json
-    compile libraries.javax_mail
     compile libraries.jmimemagic
     provided libraries.bcpg
     provided libraries.bcprov

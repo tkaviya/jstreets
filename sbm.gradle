@@ -29,7 +29,7 @@ project.ext.spring_data_version		= '2.1.10.RELEASE'
 project.ext.spring_version			= '5.1.9.RELEASE'
 
 project.ext.jersey_version			= '1.19.2'
-project.ext.jersey2_version			= '2.17'
+project.ext.jersey2_version			= '2.29.1'
 
 project.ext.axis2_version			= '1.7.9'
 
@@ -127,6 +127,9 @@ project.ext.libraries = [
 	spring_hateoas:  [ group: 'org.springframework.hateoas', name: 'spring-hateoas',		version: '0.3.0.RELEASE' ],
 	spring_javaconfig:  [ group: 'org.springframework.javaconfig', name: 'spring-javaconfig',		version: '1.0.0.m3' ],
 
+	reactive_streams:  [ group: 'org.reactivestreams', name: 'reactive-streams',		version: '1.0.1' ],
+
+
 	/* ####################################### com.fasterxml.jackson.dataformat ###################################### */
 	jackson_xml:		[ group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.5.4' ],
 	jackson:			[ group: 'com.fasterxml.jackson.core',		name: 'jackson-databind',		version: '2.4.1' ],
@@ -152,7 +155,8 @@ project.ext.libraries = [
 	jersey2_servlet: [ group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet',	version: project.jersey2_version ],
 	jersey2_jackson: [ group: 'org.glassfish.jersey.media',		name: 'jersey-media-json-jackson',	version: project.jersey2_version ],
 	jersey2_multipart: [ group: 'org.glassfish.jersey.media',	name: 'jersey-media-multipart',		version: project.jersey2_version ],
-	jersey2_spring3:   [ group: 'org.glassfish.jersey.ext',		name: 'jersey-spring3',				version: project.jersey2_version ],
+	jersey2_spring4:   [ group: 'org.glassfish.jersey.ext',		name: 'jersey-spring4',				version: project.jersey2_version ],
+	jersey2_spring5:   [ group: 'org.glassfish.jersey.ext',		name: 'jersey-spring5',				version: project.jersey2_version ],
 
 	mimepull:		   [ group: 'org.jvnet.mimepull',		 name: 'mimepull',				version: '1.9.3' ],
 
@@ -193,7 +197,8 @@ project.ext.libraries = [
 	hibernate_antlr:		[ group: 'org.hibernate',	name: 'antlr',						version: '2.7.5H3' ],
 	hibernate_ejb3:			[ group: 'org.hibernate',	name: 'ejb3-persistence',			version: '1.0.2.GA' ],
 	hibernate_c3p0:			[ group: 'org.hibernate',	name: 'hibernate-c3p0',				version: project.hibernate_version ],
-	ehcache:				[ group: 'org.ehcache',		name: 'ehcache',					version: '3.3.1' ],
+	c3p0:					[ group: 'c3p0',			name: 'c3p0',						version: '0.9.1.2' ],
+	ehcache:				[ group: 'org.ehcache',		name: 'ehcache',					version: '3.4.0' ],
 	jpa_2_1_api: [ group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api',	version: '1.0.0.Final' ],
 	jpa_2_0_api: [ group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api',	version: '1.0.1.Final' ],
 
@@ -225,6 +230,7 @@ project.ext.libraries = [
 	/* ################################################ web themes ################################################ */
     theme_pf:	    	[ group: 'org.primefaces',              name: 'primefaces',		        version: '6.1' ],
     theme_pf_all:		[ group: 'org.primefaces.themes',       name: 'all-themes',		        version: '1.0.10' ],
+    theme_pf_black_tie: [ group: 'org.primefaces.themes',       name: 'black-tie',		        version: '1.0.10' ],
     theme_pf_extensions:[ group: 'org.primefaces.extensions',   name: 'primefaces-extensions',  version: '6.1.1' ],
     theme_richfaces:	[ group: 'org.richfaces',               name: 'richfaces',		        version: '4.5.17.Final' ],
 

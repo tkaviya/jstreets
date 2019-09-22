@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="userGroupForm" rendered="#{sessionBean.isCurrentPage('auEdit')}" layout="block">
+
+    <p:remoteCommand name="refreshTable" update=":userGroupForm:userAuthentication"/>
+
+    <p:dataTable id="userAuthentication" var="authUser" value="#{authUserBean.authUsers}" tableStyle="width:auto"
+                 resizableColumns="true" editMode="cell" widgetVar="cellUserAuthentication" editable="true"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" pageLinks="5" rows="20" style="margin-bottom:20px" draggableColumns="true"
+                 rowStyleClass="#{authUser.user.user_status.name eq 'ACC_ACTIVE' ? null : 'disabledRow'}">
+        <f:facet name="header">
+
+            <p:commandButton action="#{authUserBean.initializeUsers}" value="Refresh table data" style="float:left" icon="ui-icon-arrowrefresh-1-s"
+                             onstart="PF('statusDialog').show()" oncomplete="refreshTable(); PF('statusDialog').hide()"/>
+            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+            <p:columnToggler datasource="userAuthentication" trigger="toggler" />
+            #{authUserBean.tableDescription}<br/><br/>
+        </f:facet>
+
+        <p:ajax event="cellEdit" listener="#{authUserBean.onCellEdit}" update=":msgs" />
+
+        <ui:include src="includes/exporters.xhtml">
+            <ui:param name="backingBean" value="#{authUserBean}" />
+            <ui:param name="tableName" value="userAuthentication" />
+        </ui:include>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_ID}" sortBy="#{authUser.id}" width="10px">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_ID}"/>
+            </f:facet>
+            <h:outputText value="#{authUser.id}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_USERNAME}" sortBy="#{authUser.user.username}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.user.username}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{authUser.user.username}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.usernameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_FIRST_NAME}" sortBy="#{authUser.user.first_name}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.user.first_name}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{authUser.user.first_name}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.nameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_LAST_NAME}" sortBy="#{authUser.user.last_name}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.user.last_name}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{authUser.user.last_name}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.nameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_AUTH_GROUP}" sortBy="#{authUser.auth_group.name}"
+                  filterBy="#{authUser.auth_group.name}"
+                  rendered="#{sessionBean.hasRole('ROLE_WEB_ADVANCED_MANAGE_USERS')}">
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellUserAuthentication').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.authGroups}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.auth_group.name}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{authUser.auth_group}" style="width:100%" converter="agConverter">
+                        <f:selectItems value="#{updateOptions.authGroups}" var="authGroup" itemLabel="#{authGroup.name}" itemValue="#{authGroup}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_USER_STATUS}" sortBy="#{authUser.user.user_status.name}"
+                  filterBy="#{authUser.user.user_status}">
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellUserAuthentication').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.userStatuses}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.user.user_status.name}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{authUser.user.user_status}" style="width:100%" converter="rcConverter">
+                        <f:selectItems value="#{updateOptions.userStatuses}" var="userStatus" itemLabel="#{userStatus.name}" itemValue="#{userStatus}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+        <p:column style="text-align: center" headerText="#{dataTableHeaders.HEADER_TEXT_PASSWORD}" exportable="false">
+            <p:commandButton update=":userGroupForm:auDetail" oncomplete="PF('audOP').show('#{component.clientId}')" icon="ui-icon-pencil" title="View">
+                <f:setPropertyActionListener value="#{authUser}" target="#{authUserBean.selectedAuthUser}" />
+            </p:commandButton>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_CHANNEL}" sortBy="#{authUser.channel.name}" filterBy="#{authUser.channel}">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_CHANNEL}"/>
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('cellUserAuthentication').filter()" >
+                    <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{updateOptions.channels}" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{authUser.channel.name}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_REG_DATE}" sortBy="#{authUser.registration_date}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.registration_date}" /></f:facet>
+                <f:facet name="input"><p:inputText readonly="true" value="#{authUser.registration_date}" style="width:96%"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_LAST_AUTH_DATE}" sortBy="#{authUser.last_auth_date}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{authUser.last_auth_date}" /></f:facet>
+                <f:facet name="input"><p:inputText readonly="true" value="#{authUser.last_auth_date}" style="width:96%"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+    </p:dataTable>
+
+    <p:contextMenu for="userAuthentication" widgetVar="cMenu">
+        <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellUserAuthentication').showCellEditor();return false;"/>
+        <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>
+    </p:contextMenu>
+
+    <p:overlayPanel widgetVar="audOP" showEffect="fade" hideEffect="fade" dismissable="true" showCloseIcon="true">
+        <p:outputPanel id="auDetail" style="text-align:center;">
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+            <p:panelGrid  columns="2" rendered="#{not empty authUserBean.selectedAuthUser}" columnClasses="label,value">
+                <f:facet name="header">
+                    <h:outputText value="#{authUserBean.selectedAuthUser.user.username} (#{authUserBean.selectedAuthUser.user.first_name} #{authUserBean.selectedAuthUser.user.last_name})" />
+                </f:facet>
+
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_PIN_TRIES}" />
+                <h:outputText value="#{authUserBean.selectedAuthUser.user.pin_tries}" />
+
+                <p:spacer/>
+                <p:commandButton value="Reset Pin" action="#{authUserBean.resetPin}" icon="ui-icon-unlocked"
+                                 onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" >
+                    <p:confirm header="Confirm Pin Reset" icon="ui-icon-alert"
+                               message="Proceed to reset pin for #{authUserBean.selectedAuthUser.user.username}?" />
+                </p:commandButton>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:overlayPanel>
+
+</h:form>
+
+</html>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>#{systemSettings.systemName} - Login</title>
+    <h:outputStylesheet library="css" name="style.css"  />
+    <link rel="icon" type="image/x-icon" href="resources/images/#{systemSettings.systemNameToLower}/favicon.ico"/>
+</h:head>
+<h:body>
+    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+        <p:graphicImage url="resources/images/ajaxloadingbar.gif" />
+    </p:dialog>
+    <div class="centerAlign">
+        <h:form id="loginForm">
+            <!--<p:defaultCommand target="btnLogin" />-->
+            <p:panel header="Login to #{systemSettings.systemName}" style="width: 900px;" styleClass="centerAlign">
+                <p class="centerAlign">POWERED BY</p>
+                <p class="centerAlign"><img src="resources/images/#{systemSettings.systemNameToLower}/logo.png" width="276px"
+                                            alt="Streets Logo"/></p>
+                <p:messages id="msgs" showDetail="false" showSummary="true"/>
+                <p:spacer/>
+                <h:panelGrid id="loginPanel" columns="2" styleClass="centerAlign">
+                    <p:outputLabel for="username" value="Username:" styleClass="rightAlign"/>
+                    <p:inputText id="username" name="username" value="#{credentials.username}" required="true" label="Username">
+                        <f:validator validatorId="custom.usernameValidator"  />
+                        <p:ajax update="msgUsername" event="keyup" />
+                    </p:inputText>
+                    <p:spacer/>
+                    <p:message for="username" id="msgUsername" display="icon" styleClass="rightAlign" />
+
+                    <p:outputLabel for="password" value="Password:" styleClass="rightAlign"/>
+                    <p:password id="password" name="password" value="#{credentials.password}" required="true" label="Password">
+                        <f:validateLength minimum="2" maximum="20" />
+                        <p:ajax update="msgPassword" event="keyup" />
+                    </p:password>
+                    <p:spacer/>
+                    <p:message for="password" id="msgPassword" display="icon"  styleClass="rightAlign"/>
+
+                    <p:button id="btnGoToRegister" value="Register" icon="ui-icon-triangle-1-e"
+                              onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"
+                              styleClass="leftAlign" outcome="registration.xhtml"/>
+                    <p:commandButton id="btnLogin" action="#{sessionBean.login}" value="Login" ajax="false"
+                                     onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"
+                                     icon="ui-icon-person" styleClass="rightAlign"/>
+                    <p:spacer/><p:spacer/>
+                </h:panelGrid>
+                <p:link value="Forgot Password" outcome="reset_password.xhtml" styleClass="centerAlign" ajax="false"
+                        onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>

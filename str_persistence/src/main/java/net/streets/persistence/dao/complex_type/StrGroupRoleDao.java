@@ -10,5 +10,5 @@ import java.util.List;
  * Created by tsungai.kaviya on 2015-08-24.
  */
 public interface StrGroupRoleDao extends StreetsEnumEntityDao<str_auth_group_role, Long> {
-    List<str_auth_group_role> findByGroup(str_auth_group symGroup);
+    List<str_auth_group_role> findByGroup(str_auth_group strGroup);
 }

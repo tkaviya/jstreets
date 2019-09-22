@@ -1,6 +1,5 @@
 package net.streets.persistence.entity.complex_type.wallet;
 
-import net.streets.persistence.entity.complex_type.str_company;
 import net.streets.persistence.entity.complex_type.str_user;
 import net.streets.persistence.entity.super_class.str_entity;
 
@@ -24,19 +23,15 @@ public class str_wallet extends str_entity<str_wallet> {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_admin_user_id")
     private str_user wallet_admin_user;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private str_company company;
     @Column(scale = 4)
     private BigDecimal current_balance;
 
     public str_wallet() {
     }
 
-    public str_wallet(BigDecimal current_balance, str_user wallet_admin_user, str_company company) {
+    public str_wallet(BigDecimal current_balance, str_user wallet_admin_user) {
         this.current_balance = current_balance;
         this.wallet_admin_user = wallet_admin_user;
-        this.company = company;
     }
 
     public BigDecimal getCurrent_balance() {
@@ -54,15 +49,6 @@ public class str_wallet extends str_entity<str_wallet> {
 
     public str_wallet setWallet_admin_user(str_user wallet_admin_user) {
         this.wallet_admin_user = wallet_admin_user;
-        return this;
-    }
-
-    public str_company getCompany() {
-        return company;
-    }
-
-    public str_wallet setCompany(str_company company) {
-        this.company = company;
         return this;
     }
 }

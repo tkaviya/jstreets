@@ -22,11 +22,7 @@ public class str_user extends str_entity<str_user> {
     @Column(unique = true, length = 20)
     private String username;
     @Basic
-    private String password;
-    @Basic
     private String pin;
-    @Column(nullable = false, precision = 1)
-    private Integer password_tries;
     @Column(nullable = false, precision = 1)
     private Integer pin_tries;
     @Basic(optional = false)
@@ -52,17 +48,15 @@ public class str_user extends str_entity<str_user> {
 
     public str_user() { }
 
-    public str_user(String first_name, String last_name, Date date_of_birth, String username, String password,
-                    String pin, Integer password_tries, Integer pin_tries, String salt, String email,
+    public str_user(String first_name, String last_name, Date date_of_birth, String username,
+                    String pin, Integer pin_tries, String salt, String email,
                     String msisdn, str_response_code user_status,
                     str_wallet wallet, str_country country, str_language language) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
         this.username = username;
-        this.password = password;
         this.pin = pin;
-        this.password_tries = password_tries;
         this.pin_tries = pin_tries;
         this.salt = salt;
         this.email = email;
@@ -73,12 +67,12 @@ public class str_user extends str_entity<str_user> {
         this.language = language;
     }
 
-    public str_user(String first_name, String last_name, Date date_of_birth, String username, String password,
-                    String pin, Integer password_tries, Integer pin_tries, String salt, String email,
+    public str_user(String first_name, String last_name, Date date_of_birth, String username,
+                    String pin, Integer pin_tries, String salt, String email,
                     String msisdn, str_response_code user_status,
                     str_country country, str_language language) {
-        this(first_name, last_name, date_of_birth, username, password, pin, password_tries,
-                pin_tries, salt, email, msisdn, user_status, null, country, language);
+        this(first_name, last_name, date_of_birth, username, pin,
+             pin_tries, salt, email, msisdn, user_status, null, country, language);
     }
 
     public String getFirst_name() {

@@ -25,7 +25,7 @@ public class StrGroupRoleDaoImpl extends StrEnumEntityDaoImpl<str_auth_group_rol
     protected StrGroupRoleDaoImpl() { super(str_auth_group_role.class); }
 
     @Override
-    public List<str_auth_group_role> findByGroup(str_auth_group symGroup) {
-        return findWhere(new Pair<String, Object>("group_id", symGroup.getId()));
+    public List<str_auth_group_role> findByGroup(str_auth_group strGroup) {
+        return findWhere(new Pair<String, Object>("group_id", strGroup.getId()));
     }
 }

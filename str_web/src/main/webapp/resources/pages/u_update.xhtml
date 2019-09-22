@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="userForm" rendered="#{sessionBean.isCurrentPage('userEdit')}" layout="block">
+    <p:remoteCommand name="refreshTable" update=":userForm:userTable"/>
+    <p:dataTable id="userTable" var="user" value="#{userBean.users}" tableStyle="width:auto"
+                 resizableColumns="true" editMode="cell" widgetVar="cellUsers" editable="true" draggableColumns="true"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" pageLinks="5" rows="20" style="margin-bottom:20px">
+        <f:facet name="header">
+            <p:commandButton action="#{userBean.initializeUsers}" value="Refresh table data" style="float:left" icon="ui-icon-arrowrefresh-1-s"
+                             onstart="PF('statusDialog').show()" oncomplete="refreshTable(); PF('statusDialog').hide()"/>
+            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+            <p:columnToggler datasource="userTable" trigger="toggler" />
+            #{userBean.tableDescription}<br/><br/>
+        </f:facet>
+        <p:ajax event="cellEdit" listener="#{userBean.onCellEdit}" update=":msgs" />
+
+        <ui:include src="includes/exporters.xhtml">
+            <ui:param name="backingBean" value="#{userBean}" />
+            <ui:param name="tableName" value="userTable" />
+        </ui:include>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_ID}" sortBy="#{user.id}" width="10px">
+            <f:facet name="header">
+                <h:outputText value="#{dataTableHeaders.HEADER_TEXT_ID}"/>
+            </f:facet>
+            <h:outputText value="#{user.id}" />
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_USERNAME}" sortBy="#{user.username}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.username}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{user.username}" style="width:96%">
+                        <f:validator validatorId="custom.usernameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_FIRST_NAME}" sortBy="#{user.first_name}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.first_name}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{user.first_name}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.nameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_LAST_NAME}" sortBy="#{user.last_name}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.last_name}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{user.last_name}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.nameValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_CNAME}" sortBy="#{user.wallet.company.company_name}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.wallet.company.company_name}" /></f:facet>
+                <f:facet name="input"><p:inputText value="#{user.wallet.company.company_name}" readonly="true" style="width:96%"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_MSISDN}" sortBy="#{user.msisdn}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.msisdn}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{user.msisdn}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.fullMsisdnValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_EMAIL}" sortBy="#{user.email}">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.email}" /></f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{user.email}" required="true" style="width:96%">
+                        <f:validator validatorId="custom.emailValidator"  />
+                    </p:inputText>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_LANGUAGE}" sortBy="#{user.language.name}" exportable="false">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.language.name}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{user.language}" style="width:100%" converter="languageConverter">
+                        <f:selectItems value="#{updateOptions.languages}" var="language" itemLabel="#{language.name}" itemValue="#{language}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_COUNTRY}" sortBy="#{user.country.name}" exportable="false">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{user.country.name}" /></f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{user.country}" style="width:100%" converter="countryConverter">
+                        <f:selectItems value="#{updateOptions.countries}" var="country" itemLabel="#{country.name}" itemValue="#{country}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+    </p:dataTable>
+
+    <p:contextMenu for="userTable" widgetVar="cMenu">
+        <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellUsers').showCellEditor();return false;"/>
+        <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>
+    </p:contextMenu>
+
+
+</h:form>
+
+</html>

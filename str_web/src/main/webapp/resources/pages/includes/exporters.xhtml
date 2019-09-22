@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:facet name="{Exporters}">
+    <h:commandLink>
+        <p:graphicImage name="images/excel.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;"/>
+        <p:dataExporter type="xls" target="#{tableName}" fileName="#{backingBean.tableDescription}"
+                        options="#{exportOptions.excelOptions}" />
+    </h:commandLink>
+
+    <h:commandLink>
+        <p:graphicImage name="images/pdf.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;"/>
+        <p:dataExporter type="pdf" target="#{tableName}" fileName="#{backingBean.tableDescription}"
+                        options="#{exportOptions.pdfOptions}"/>
+    </h:commandLink>
+
+    <h:commandLink>
+        <p:graphicImage name="images/csv.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;"/>
+        <p:dataExporter type="csv" target="#{tableName}" fileName="#{backingBean.tableDescription}" />
+    </h:commandLink>
+
+    <h:commandLink>
+        <p:graphicImage name="images/xml.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;"/>
+        <p:dataExporter type="xml" target="#{tableName}" fileName="#{backingBean.tableDescription}" />
+    </h:commandLink>
+
+    <p:remoteCommand name="refreshMsgs" update=":msgs" actionListener="#{backingBean.showExportMessage}"/>
+    <span style="float: right; text-align: right; width: 320px;">
+        <h:outputLabel value="Email Report: " style="margin-right: 3px;"/>
+        <p:inputText value="#{backingBean.reportEmailRecipient}" styleClass="mailToField" autocomplete="on" placeholder="enter email address">
+        </p:inputText>
+        <p:commandLink ajax="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide(); refreshMsgs();">
+            <p:graphicImage name="images/excel.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;"/>
+            <p:dataExporter type="xls" target="#{tableName}" fileName="#{backingBean.tableDescription}"
+                            options="#{exportOptions.excelOptions}" postProcessor="#{backingBean.postProcessXLS}" />
+        </p:commandLink>
+        <p:commandLink ajax="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide(); refreshMsgs();">
+            <p:graphicImage name="images/pdf.png" style="margin-right: 3px; width: 20px; position: relative; top: 4px;;"/>
+            <p:dataExporter type="pdf" target="#{tableName}" fileName="#{backingBean.tableDescription}"
+                            options="#{exportOptions.pdfOptions}"
+                            preProcessor="#{backingBean.preProcessPDF}"
+                            postProcessor="#{backingBean.postProcessPDF}">
+            </p:dataExporter>
+        </p:commandLink>
+    </span>
+</f:facet>
+</html>

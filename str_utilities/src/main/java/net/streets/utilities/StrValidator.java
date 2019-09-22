@@ -5,7 +5,7 @@ import net.streets.common.utilities.CommonUtilities;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
-import static net.streets.common.enumeration.StrConfig.CONFIG_DEFAULT_COUNTRY_CODE;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_DEFAULT_COUNTRY_CODE;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
 
 /**

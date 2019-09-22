@@ -1,7 +1,7 @@
 package net.streets.persistence.entity.enumeration;
 
-import net.streets.common.enumeration.StrResponseCode;
 import net.streets.persistence.entity.super_class.str_enum_entity;
+import net.streets.persistence.enumeration.StrResponseCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,7 @@ public class str_response_code extends str_enum_entity<str_response_code> {
     @Column(nullable = false)
     private String response_message;
 
-    public str_response_code() {
-    }
+    public str_response_code() {}
 
     public str_response_code(String name, String response_message, Boolean enabled) {
         super(name, enabled);

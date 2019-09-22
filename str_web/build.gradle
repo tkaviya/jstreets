@@ -27,13 +27,27 @@ dependencies {
 
     testCompile project(':str_common').sourceSets.test.output
     testCompile project(':str_persistence').sourceSets.test.output
+    testCompile project(':str_utilities').sourceSets.test.output
     testCompile project(':str_authentication').sourceSets.test.output
     testCompile project(':str_core').sourceSets.test.output
     testCompile project(':str_api').sourceSets.test.output
 
     compile libraries.spring_core
+    compile libraries.spring_web
+    compile libraries.reactive_streams
+    compile libraries.jsf_api
+    compile libraries.jsf_impl
+    compile libraries.cdi_api
+    compile libraries.javax_servlet_jstl
+    compile libraries.javax_servlet_api
+    compile libraries.javax_validation
 
     compile libraries.theme_pf
+    compile libraries.theme_pf_all
+    compile libraries.theme_pf_extensions
+    compile libraries.itext
+    compile libraries.poi
+    compile libraries.xmlbeans
 
     testCompile libraries.testng
     testCompile libraries.jmockit
