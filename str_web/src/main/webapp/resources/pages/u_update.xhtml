@@ -69,13 +69,6 @@
             </p:cellEditor>
         </p:column>
 
-        <p:column headerText="#{dataTableHeaders.HEADER_TEXT_CNAME}" sortBy="#{user.wallet.company.company_name}">
-            <p:cellEditor>
-                <f:facet name="output"><h:outputText value="#{user.wallet.company.company_name}" /></f:facet>
-                <f:facet name="input"><p:inputText value="#{user.wallet.company.company_name}" readonly="true" style="width:96%"/></f:facet>
-            </p:cellEditor>
-        </p:column>
-
         <p:column headerText="#{dataTableHeaders.HEADER_TEXT_MSISDN}" sortBy="#{user.msisdn}">
             <p:cellEditor>
                 <f:facet name="output"><h:outputText value="#{user.msisdn}" /></f:facet>

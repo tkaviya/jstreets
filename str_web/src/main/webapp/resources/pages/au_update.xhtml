@@ -76,7 +76,7 @@
 
         <p:column headerText="#{dataTableHeaders.HEADER_TEXT_AUTH_GROUP}" sortBy="#{authUser.auth_group.name}"
                   filterBy="#{authUser.auth_group.name}"
-                  rendered="#{sessionBean.hasRole('ROLE_WEB_ADVANCED_MANAGE_USERS')}">
+                  rendered="#{sessionBean.hasRole('ROLE_ADVANCED_MANAGE_USERS')}">
             <f:facet name="filter">
                 <p:selectOneMenu onchange="PF('cellUserAuthentication').filter()" >
                     <f:selectItem itemLabel="No Filter" itemValue="#{null}" noSelectionOption="true" />
@@ -110,7 +110,7 @@
                 </f:facet>
             </p:cellEditor>
         </p:column>
-        <p:column style="text-align: center" headerText="#{dataTableHeaders.HEADER_TEXT_PASSWORD}" exportable="false">
+        <p:column style="text-align: center" headerText="#{dataTableHeaders.HEADER_TEXT_PIN}" exportable="false">
             <p:commandButton update=":userGroupForm:auDetail" oncomplete="PF('audOP').show('#{component.clientId}')" icon="ui-icon-pencil" title="View">
                 <f:setPropertyActionListener value="#{authUser}" target="#{authUserBean.selectedAuthUser}" />
             </p:commandButton>

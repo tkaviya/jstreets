@@ -11,13 +11,13 @@ import java.util.Date;
 @AttributeOverride(name = "id", column = @Column(name = "auth_user_id"))
 @Cacheable(false)
 public class str_auth_user extends str_entity<str_auth_user> {
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "str_user_id")
     private str_user user;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id")
     private str_channel channel;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_group_id")
     private str_auth_group auth_group;
     @Basic

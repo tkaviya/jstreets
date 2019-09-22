@@ -1,7 +1,7 @@
 package net.streets.web.annotations;
 
-import net.streets.web.validation.password.PasswordClientValidationConstraint;
-import net.streets.web.validation.password.PasswordConstraintValidator;
+import net.streets.web.validation.pin.PinClientValidationConstraint;
+import net.streets.web.validation.pin.PinConstraintValidator;
 import org.primefaces.validate.bean.ClientConstraint;
 
 import javax.validation.Constraint;
@@ -15,11 +15,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = PasswordConstraintValidator.class)
-@ClientConstraint(resolvedBy = PasswordClientValidationConstraint.class)
+@Constraint(validatedBy = PinConstraintValidator.class)
+@ClientConstraint(resolvedBy = PinClientValidationConstraint.class)
 @Documented
-public @interface PasswordConstraint {
-    String message() default "Invalid password specified";
+public @interface PinConstraint {
+    String message() default "Invalid pin specified";
 
     Class<?>[] groups() default {};
 

@@ -20,10 +20,10 @@ import java.util.Date;
 @AttributeOverride(name = "id", column = @Column(name = "wallet_transaction_id"))
 public class str_wallet_transaction extends str_entity<str_wallet_transaction> {
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id")
     private str_wallet wallet;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_type_id")
     private str_event_type event_type;
     @Column(nullable = false)

@@ -18,7 +18,7 @@ import static net.streets.utilities.StrValidator.isValidPassword;
 /**
  * ConstraintValidator for @Name
  */
-public class PassworConstraintValidator implements ConstraintValidator<PasswordConstraint, String> {
+public class PasswordConstraintValidator implements ConstraintValidator<PasswordConstraint, String> {
 
     public void initialize(PasswordConstraint a) {
     }

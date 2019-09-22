@@ -17,11 +17,11 @@ import javax.persistence.*;
 @Cacheable(false)
 public class str_auth_group_role extends str_enum_entity<str_auth_group_role> {
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_group_id")
     private str_auth_group auth_group;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private str_role role;
 

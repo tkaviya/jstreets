@@ -32,8 +32,8 @@ dependencies {
 	compile libraries.commons_logging
 	compile libraries.hibernate_c3p0
 	compile libraries.c3p0
-//	compile libraries.hibernate_ehcache
-//	compile libraries.ehcache
+	compile libraries.hibernate_ehcache
+	compile libraries.ehcache
 
     testCompile libraries.testng
     testCompile libraries.jmockit

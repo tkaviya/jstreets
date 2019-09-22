@@ -25,7 +25,7 @@ import static javax.faces.application.FacesMessage.*;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 import static net.streets.persistence.dao.EnumEntityRepoManager.findByName;
 import static net.streets.persistence.enumeration.StrAuthGroup.SUPER_USER;
-import static net.streets.persistence.enumeration.StrAuthGroup.WEB_ADMIN;
+import static net.streets.persistence.enumeration.StrAuthGroup.SYS_ADMIN;
 import static net.streets.persistence.enumeration.StrChannel.WEB;
 import static net.streets.persistence.enumeration.StrEventType.USER_LOGIN;
 import static net.streets.persistence.enumeration.StrResponseCode.SUCCESS;
@@ -48,6 +48,7 @@ public class SessionBean implements Serializable {
     private str_auth_user strAuthUser;
     private SystemPage currentPage = PAGE_LOGIN;
     private static final HashMap<String, SystemPage> pageHandlers = new HashMap<>();
+    private static final HashMap<String, Boolean> userPermissions = new HashMap<>();
 
     private WebAuthenticationProvider authProvider;
 
@@ -81,7 +82,7 @@ public class SessionBean implements Serializable {
     }
 
     private SystemPage getDefaultStartPage(str_auth_group group) {
-        if (group.equals(fromEnum(SUPER_USER)) || group.equals(fromEnum(WEB_ADMIN))) {
+        if (group.equals(fromEnum(SUPER_USER)) || group.equals(fromEnum(SYS_ADMIN))) {
             return PAGE_SUMMARY;
         } else {
             return PAGE_S_AUTH_REPORT;
@@ -100,7 +101,7 @@ public class SessionBean implements Serializable {
 
 
         authProvider = new WebAuthenticationProvider(
-                authLog, credentials.getUsername(), credentials.getPassword(), userAgent
+                authLog, credentials.getUsername(), credentials.getPin(), userAgent
         );
 
         var authResponse = authProvider.authenticateUser();
@@ -184,6 +185,11 @@ public class SessionBean implements Serializable {
 
     public boolean hasRole(String permission) {
         logger.info("Checking for permission: " + permission);
-        return isLoggedIn() && authProvider.hasRole(findByName(str_role.class, permission));
+        if (!isLoggedIn()) { return false; }
+        //cache user permissions for this session
+        if (!userPermissions.containsKey(permission)) {
+            userPermissions.put(permission, authProvider.hasRole(findByName(str_role.class, permission)));
+        }
+        return userPermissions.get(permission);
     }
 }

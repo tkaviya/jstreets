@@ -28,8 +28,8 @@
                     <tr valign="top">
                         <td valign="top" class="leftAlign">
                             <table width="100%">
-                                <tr><td>Welcome #{sessionBean.streetsAuthUser.user.first_name} #{sessionBean.streetsAuthUser.user.last_name} #{sessionBean.streetsAuthUser.auth_group.name}</td></tr>
-                                <tr><td>Last login: #{sessionBean.streetsAuthUser.last_login_date}</td></tr>
+                                <tr><td>Welcome #{sessionBean.strAuthUser.user.first_name} #{sessionBean.strAuthUser.user.last_name} #{sessionBean.strAuthUser.auth_group.name}</td></tr>
+                                <tr><td>Last login: #{sessionBean.strAuthUser.last_login_date}</td></tr>
                             </table>
                         </td>
                         <td valign="top" class="rightAlign" style="vertical-align: top">
@@ -43,23 +43,23 @@
         <div id="pageMenu" class="centerAlign" style="width: 20%; float: left">
             <h:form>
                 <f:ajax render=":dataDiv" execute="@this">
-                    <p:panelMenu id="vpPanelMenu" style="width:90%; float: left; text-align: left" >
-                        <p:submenu label="EVD Configuration" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_EVD')}">
-                            <p:menuitem value="System Summary" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_STOCK')}" action="#{sessionBean.changeDisplay('summary')}" ajax="false" icon="ui-icon-tag" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:panelMenu id="sysPanelMenu" style="width:90%; float: left; text-align: left" >
+                        <p:submenu label="System Configuration" rendered="#{sessionBean.hasRole('ROLE_MANAGE_SYSTEM')}">
+                            <p:menuitem value="System Summary" action="#{sessionBean.changeDisplay('summary')}" ajax="false" icon="ui-icon-tag" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
-                        <p:submenu label="User Management" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}">
-                            <p:menuitem value="User Details" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}" action="#{sessionBean.changeDisplay('userEdit')}" ajax="false" icon="ui-icon-person" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                            <p:menuitem value="User Authentication" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_USERS')}" action="#{sessionBean.changeDisplay('auEdit')}" ajax="false" icon="ui-icon-locked" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:submenu label="User Management" rendered="#{sessionBean.hasRole('ROLE_MANAGE_USERS')}">
+                            <p:menuitem value="User Details" action="#{sessionBean.changeDisplay('userEdit')}" ajax="false" icon="ui-icon-person" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:menuitem value="User Authentication" action="#{sessionBean.changeDisplay('auEdit')}" ajax="false" icon="ui-icon-locked" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
-                        <p:submenu label="System Reports" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_REPORTS')}">
-                            <p:menuitem value="Logins" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_AUTHENTICATION_REPORTS')}" action="#{sessionBean.changeDisplay('authReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                            <p:menuitem value="System" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SYSTEM_REPORTS')}" action="#{sessionBean.changeDisplay('sysReport')}" ajax="false" icon="ui-icon-clock" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:submenu label="System Reports" rendered="#{sessionBean.hasRole('ROLE_VIEW_REPORTS')}">
+                            <p:menuitem value="Logins" action="#{sessionBean.changeDisplay('authReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                            <p:menuitem value="System" action="#{sessionBean.changeDisplay('sysReport')}" ajax="false" icon="ui-icon-clock" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
-                        <p:submenu label="My Reports" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SINGLE_REPORTS')}">
-                            <p:menuitem value="My Login Report" rendered="#{sessionBean.hasRole('ROLE_WEB_VIEW_SINGLE_AUTHENTICATION_REPORTS')}" action="#{sessionBean.changeDisplay('sAuthReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:submenu label="My Reports" rendered="#{sessionBean.hasRole('ROLE_VIEW_SINGLE_REPORTS')}">
+                            <p:menuitem value="My Login Report" action="#{sessionBean.changeDisplay('sAuthReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
-                        <p:submenu label="My Settings" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_SETTINGS')}">
-                            <p:menuitem value="Account Settings" rendered="#{sessionBean.hasRole('ROLE_WEB_MANAGE_SETTINGS')}" action="#{sessionBean.changeDisplay('uSettings')}" ajax="false" icon="ui-icon-wrench" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:submenu label="My Settings" rendered="#{sessionBean.hasRole('ROLE_MANAGE_SETTINGS')}">
+                            <p:menuitem value="Account Settings" action="#{sessionBean.changeDisplay('uSettings')}" ajax="false" icon="ui-icon-wrench" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
                         <p:separator />
                     </p:panelMenu>

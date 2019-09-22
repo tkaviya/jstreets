@@ -32,13 +32,13 @@
                     <p:spacer/>
                     <p:message for="username" id="msgUsername" display="icon" styleClass="rightAlign" />
 
-                    <p:outputLabel for="password" value="Password:" styleClass="rightAlign"/>
-                    <p:password id="password" name="password" value="#{credentials.password}" required="true" label="Password">
-                        <f:validateLength minimum="2" maximum="20" />
-                        <p:ajax update="msgPassword" event="keyup" />
+                    <p:outputLabel for="pin" value="Pin:" styleClass="rightAlign"/>
+                    <p:password id="pin" name="pin" value="#{credentials.pin}" required="true" label="Pin">
+                        <f:validateLength minimum="4" maximum="4" />
+                        <p:ajax update="msgPin" event="keyup" />
                     </p:password>
                     <p:spacer/>
-                    <p:message for="password" id="msgPassword" display="icon"  styleClass="rightAlign"/>
+                    <p:message for="pin" id="msgPin" display="icon" styleClass="rightAlign"/>
 
                     <p:button id="btnGoToRegister" value="Register" icon="ui-icon-triangle-1-e"
                               onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"
@@ -48,7 +48,7 @@
                                      icon="ui-icon-person" styleClass="rightAlign"/>
                     <p:spacer/><p:spacer/>
                 </h:panelGrid>
-                <p:link value="Forgot Password" outcome="reset_password.xhtml" styleClass="centerAlign" ajax="false"
+                <p:link value="Forgot Pin" outcome="reset_password.xhtml" styleClass="centerAlign" ajax="false"
                         onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()"/>
             </p:panel>
         </h:form>

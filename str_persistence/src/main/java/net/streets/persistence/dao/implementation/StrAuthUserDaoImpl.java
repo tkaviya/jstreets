@@ -5,16 +5,15 @@ import net.streets.persistence.dao.complex_type.StrAuthUserDao;
 import net.streets.persistence.dao.super_class.AbstractDao;
 import net.streets.persistence.entity.complex_type.str_auth_user;
 import net.streets.persistence.entity.enumeration.str_channel;
-import net.streets.persistence.entity.enumeration.str_response_code;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static net.streets.persistence.dao.EnumEntityRepoManager.findByName;
 import static net.streets.persistence.enumeration.StrResponseCode.ACC_ACTIVE;
 import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
+import static net.streets.persistence.helper.StrEnumHelper.fromEnum;
 
 /**
  * Created with IntelliJ IDEA.
@@ -47,7 +46,7 @@ public class StrAuthUserDaoImpl extends AbstractDao<str_auth_user, Long> impleme
             criteria = asList(
                     new Pair<>("user." + fieldName, value),
                     new Pair<>("channel_id", channel.getId()),
-                    new Pair<>("user.user_status", findByName(str_response_code.class, ACC_ACTIVE.name()).getId()));
+                    new Pair<>("user.user_status", fromEnum(ACC_ACTIVE).getId()));
         }
 
         List<str_auth_user> results = getEntityManagerRepo().findWhere(getEntityClass(), criteria);

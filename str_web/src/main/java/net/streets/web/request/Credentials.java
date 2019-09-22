@@ -1,6 +1,6 @@
 package net.streets.web.request;
 
-import net.streets.web.annotations.PasswordConstraint;
+import net.streets.web.annotations.PinConstraint;
 import net.streets.web.annotations.UsernameConstraint;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -22,8 +22,8 @@ public class Credentials implements Serializable {
 
     @UsernameConstraint
     private String username;
-    @PasswordConstraint
-    private String password;
+    @PinConstraint
+    private String pin;
 
     public String getUsername() {
         return username;
@@ -33,11 +33,11 @@ public class Credentials implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPin() {
+        return pin;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 }

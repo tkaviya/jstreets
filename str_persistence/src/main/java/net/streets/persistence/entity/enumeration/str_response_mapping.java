@@ -2,10 +2,7 @@ package net.streets.persistence.entity.enumeration;
 
 import net.streets.persistence.entity.super_class.str_entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /***************************************************************************
  *                                                                         *
@@ -25,8 +22,8 @@ public class str_response_mapping extends str_entity<str_response_mapping> {
     @Column(nullable = false)
     private Long response_code_id;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn
     private str_response_code mapped_response_code;
 
     @Column(nullable = false)

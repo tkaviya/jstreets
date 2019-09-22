@@ -25,7 +25,7 @@ import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
 public class SummaryBean extends JSFReportable {
 
     private static final Logger logger = Logger.getLogger(SummaryBean.class.getSimpleName());
-    private static final String TABLE_NAME = "Voucher Stock";
+    private static final String TABLE_NAME = "System Status";
     private String todayStartTime = null;
 
     private String getTodayStartTime() {

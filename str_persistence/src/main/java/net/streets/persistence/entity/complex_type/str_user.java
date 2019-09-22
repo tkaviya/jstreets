@@ -33,16 +33,16 @@ public class str_user extends str_entity<str_user> {
     @Basic(optional = false)
     @Column(unique = true, length = 12)
     private String msisdn;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_status_id")
     private str_response_code user_status;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id")
     private str_wallet wallet;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private str_country country;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "language_id")
     private str_language language;
 

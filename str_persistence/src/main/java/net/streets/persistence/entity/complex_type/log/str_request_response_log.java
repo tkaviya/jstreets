@@ -19,19 +19,19 @@ import java.util.Date;
 
 @Entity
 public class str_request_response_log extends str_entity<str_request_response_log> {
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id")
     private str_channel channel;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_type_id")
     private str_event_type event_type;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "system_user_id")
     private str_user system_user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_user_id")
     private str_auth_user auth_user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "response_code_id")
     private str_response_code response_code;
     @Basic
@@ -101,7 +101,7 @@ public class str_request_response_log extends str_entity<str_request_response_lo
 
     public str_request_response_log setAuth_user(str_auth_user auth_user) {
         this.auth_user = auth_user;
-        if (this.system_user == null) {
+        if (this.system_user == null && auth_user != null) {
             this.system_user = auth_user.getUser();
         }
         return this;

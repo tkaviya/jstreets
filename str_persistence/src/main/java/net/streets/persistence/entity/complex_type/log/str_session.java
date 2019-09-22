@@ -3,10 +3,7 @@ package net.streets.persistence.entity.complex_type.log;
 import net.streets.persistence.entity.complex_type.str_auth_user;
 import net.streets.persistence.entity.super_class.str_entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -18,7 +15,7 @@ import java.util.Date;
 
 @Entity
 public class str_session extends str_entity<str_session> {
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_user_id")
     private str_auth_user auth_user;
     @Basic

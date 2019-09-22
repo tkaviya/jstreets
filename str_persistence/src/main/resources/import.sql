@@ -24,7 +24,7 @@ insert ignore into str_config(config_id,is_enabled,config_name,config_value,conf
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (83,1,'default_language','English','Default language for user registrations');
 #registration settings
 # insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (100,1,'default_desktop_group','DESKTOP_AGENT','Default auth group for desktop user registrations');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (101,1,'default_web_auth_group','WEB_USER','Default auth group for web user registrations');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (101,1,'default_web_auth_group','SYS_USER','Default auth group for web user registrations');
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (105,1,'default_smart_phone_auth_group','MOBILE_USER','Default auth group for mobile user registrations');
 #company settings
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (120,1,'domain_name','imthestreets.com','Domain name for where the system is hosted');
@@ -141,51 +141,24 @@ insert ignore into str_response_code(id,name,is_enabled,response_message) values
 update str_response_code set id = 0 where name = 'SUCCESS';
 
 insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (1, 'SUPER_USER',1);
-insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (2, 'WEB_ADMIN',1);
-insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (3, 'WEB_USER',1);
-insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (4, 'MOBILE_USER',1);
+insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (2, 'SYS_ADMIN',1);
+insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (3, 'SYS_USER',1);
 
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_EVD', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_STOCK', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_PROVIDERS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_VOUCHERS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_SYSTEM', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_WALLETS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_USERS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_ADVANCED_MANAGE_USERS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_SYSTEM_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_AUTHENTICATION_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_PAYMENT_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_TRANSACTION_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_SINGLE_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_SINGLE_AUTHENTICATION_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_SINGLE_PAYMENT_REPORTS', 1);
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_VIEW_SINGLE_TRANSACTION_REPORTS', 1);
-
-insert ignore into str_role(name, is_enabled) values ('ROLE_WEB_MANAGE_SETTINGS', 1);
-
-insert ignore into str_role(name, is_enabled) values ('ROLE_POS_MANAGE_SETTINGS', 1);
-
-insert ignore into str_role(name, is_enabled) values ('ROLE_MOBILE_MANAGE_SETTINGS', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_ADVANCED_MANAGE_USERS', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_MANAGE_USERS', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_MANAGE_SYSTEM', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_VIEW_REPORTS', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_VIEW_SINGLE_REPORTS', 1);
+insert ignore into str_role(name, is_enabled) values ('ROLE_CHANGE_SETTINGS', 1);
 
 /* Insert all roles for SUPER_USER */
 insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SUPER_USER' and sr.name LIKE '%';
 
-/* Insert roles for EMPOWER_SYSTEM_ADMIN */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'WEB_ADMIN' and sr.name LIKE 'ROLE_WEB_%';
+/* Insert all roles for SYS_ADMIN */
+insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SYS_ADMIN' and (sr.name LIKE 'ROLE_MANAGE_%' or sr.name LIKE 'ROLE_CHANGE_%' or sr.name LIKE 'ROLE_VIEW_%');
 
-/* Insert roles for EMPOWER_SYSTEM_CLERK */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'WEB_CLERK' and (sr.name IN ('ROLE_WEB_MANAGE_SYSTEM', 'ROLE_WEB_MANAGE_EVD', 'ROLE_WEB_MANAGE_STOCK', 'ROLE_WEB_MANAGE_WALLETS', 'ROLE_WEB_MANAGE_USERS', 'ROLE_WEB_MANAGE_SETTINGS') or sr.name LIKE 'ROLE_WEB_VIEW_%');
-
-/* Insert roles for EMPOWER_SYSTEM_AGENT */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'WEB_AGENT' and (sr.name LIKE 'ROLE_WEB_VIEW_SINGLE_%' or sr.name = 'ROLE_WEB_MANAGE_SETTINGS');
-
-/* Insert roles for POS_ADMIN */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'POS_ADMIN' and sr.name LIKE ('ROLE_POS_%');
-
-/* Insert roles for MOBILE_ADMIN */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'MOBILE_ADMIN' and sr.name LIKE ('ROLE_MOBILE_%');
+/* Insert roles for SYSTEM_AGENT */
+insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SYS_USER' and (sr.name = 'ROLE_CHANGE_SETTINGS' or sr.name = 'ROLE_VIEW_SINGLE_REPORTS');
 
 insert ignore into str_user(first_name,last_name,username,email,msisdn,salt,user_status_id,country_id,language_id,pin,pin_tries) values ('Tsungai','Kaviya','admin','tsungai.kaviya@gmail.com','263785107830','kX4NDlXT2ySxR7e3',30,2,1,'8e77fa77fa7c4c6488fedaaeabf595a09a96cdff2e9196668e817a012f812',0);
 insert ignore into str_auth_user (str_user_id,channel_id,auth_group_id,device_id,registration_date,last_auth_date,last_login_date) SELECT su.str_user_id,2,1,null,sysdate(),NULL,NULL FROM str_user su WHERE su.username = 'admin';
