@@ -47,6 +47,9 @@
                         <p:submenu label="System Configuration" rendered="#{sessionBean.hasRole('ROLE_MANAGE_SYSTEM')}">
                             <p:menuitem value="System Summary" action="#{sessionBean.changeDisplay('summary')}" ajax="false" icon="ui-icon-tag" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
+                        <p:submenu label="The Streets" rendered="#{sessionBean.hasRole('ROLE_STREETS')}">
+                            <p:menuitem value="Streets" action="#{sessionBean.changeDisplay('streets')}" ajax="false" icon="ui-icon-tag" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        </p:submenu>
                         <p:submenu label="User Management" rendered="#{sessionBean.hasRole('ROLE_MANAGE_USERS')}">
                             <p:menuitem value="User Details" action="#{sessionBean.changeDisplay('userEdit')}" ajax="false" icon="ui-icon-person" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                             <p:menuitem value="User Authentication" action="#{sessionBean.changeDisplay('auEdit')}" ajax="false" icon="ui-icon-locked" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -58,7 +61,7 @@
                         <p:submenu label="My Reports" rendered="#{sessionBean.hasRole('ROLE_VIEW_SINGLE_REPORTS')}">
                             <p:menuitem value="My Login Report" action="#{sessionBean.changeDisplay('sAuthReport')}" ajax="false" icon="ui-icon-grip-diagonal-se" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
-                        <p:submenu label="My Settings" rendered="#{sessionBean.hasRole('ROLE_MANAGE_SETTINGS')}">
+                        <p:submenu label="My Settings" rendered="#{sessionBean.hasRole('ROLE_CHANGE_SETTINGS')}">
                             <p:menuitem value="Account Settings" action="#{sessionBean.changeDisplay('uSettings')}" ajax="false" icon="ui-icon-wrench" onclick="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                         </p:submenu>
                         <p:separator />

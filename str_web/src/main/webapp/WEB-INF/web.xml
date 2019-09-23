@@ -100,6 +100,21 @@
         <!--<param-value>#{loggedInUser.preferences.theme}</param-value>-->
     <!--</context-param>-->
 
+    <context-param>
+        <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+<!--    <context-param>-->
+<!--        <param-name>javax.faces.WEBSOCKET_ENDPOINT_PORT</param-name>-->
+<!--        <param-value>8000</param-value>-->
+<!--    </context-param>-->
+
+<!--    <context-param>-->
+<!--        <param-name>javax.faces.ENABLE_CDI_RESOLVER_CHAIN</param-name>-->
+<!--        <param-value>true</param-value>-->
+<!--    </context-param>-->
+
     <!-- Str API -->
 
     <servlet>

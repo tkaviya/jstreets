@@ -13,6 +13,7 @@ public class SystemPages {
     public static final SystemPage PAGE_REGISTRATION = new SystemPage("authentication", "registration.xhtml", null);
     public static final SystemPage PAGE_RESET_PASSWORD = new SystemPage("resetPassword", "reset_password.xhtml", null);
     public static final SystemPage PAGE_SUMMARY = new SystemPage("summary", "admin.xhtml", "summary.xhtml");
+    public static final SystemPage PAGE_STREETS = new SystemPage("streets", "admin.xhtml", "streets.xhtml");
 
     public static final SystemPage PAGE_USER_UPDATE = new SystemPage("userEdit", "admin.xhtml", "u_update.xhtml");
     public static final SystemPage PAGE_AU_UPDATE = new SystemPage("auEdit", "admin.xhtml", "au_update.xhtml");

@@ -35,9 +35,10 @@ dependencies {
     compile libraries.spring_core
     compile libraries.spring_web
     compile libraries.reactive_streams
-    compile libraries.jsf_api
-    compile libraries.jsf_impl
+//    compile libraries.jsf_api
+//    compile libraries.jsf_impl
     compile libraries.cdi_api
+    compile libraries.jsf
     compile libraries.javax_servlet_jstl
     compile libraries.javax_servlet_api
     compile libraries.javax_validation

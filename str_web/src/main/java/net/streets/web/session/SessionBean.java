@@ -59,6 +59,7 @@ public class SessionBean implements Serializable {
         registerPageHandler(PAGE_REGISTRATION);
         registerPageHandler(PAGE_RESET_PASSWORD);
         registerPageHandler(PAGE_SUMMARY);
+        registerPageHandler(PAGE_STREETS);
         registerPageHandler(PAGE_USER_UPDATE);
         registerPageHandler(PAGE_AU_UPDATE);
         registerPageHandler(PAGE_AUTH_REPORT);
@@ -85,7 +86,7 @@ public class SessionBean implements Serializable {
         if (group.equals(fromEnum(SUPER_USER)) || group.equals(fromEnum(SYS_ADMIN))) {
             return PAGE_SUMMARY;
         } else {
-            return PAGE_S_AUTH_REPORT;
+            return PAGE_STREETS;
         }
     }
 
@@ -184,7 +185,7 @@ public class SessionBean implements Serializable {
     }
 
     public boolean hasRole(String permission) {
-        logger.info("Checking for permission: " + permission);
+        logger.fine("Checking for permission: " + permission);
         if (!isLoggedIn()) { return false; }
         //cache user permissions for this session
         if (!userPermissions.containsKey(permission)) {

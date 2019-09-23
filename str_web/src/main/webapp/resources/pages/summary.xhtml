@@ -9,7 +9,7 @@
     <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
 </f:metadata>
 
-<h:form id="voucherStockForm" rendered="#{sessionBean.isCurrentPage('summary')}" layout="block">
+<h:form id="summaryForm" rendered="#{sessionBean.isCurrentPage('summary')}" layout="block">
 
     <f:facet name="header">System Statistics</f:facet>
     <table style="width:100%; vertical-align: top; text-align: center; border-width: 1px;">

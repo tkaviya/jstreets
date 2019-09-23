@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <script type="text/javascript">
+		function socketListener(message, channel, event) {
+			document.getElementById("chatContentDiv").innerHTML += message + "&lt;br/>";
+		}
+    </script>
+</h:head>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+</f:metadata>
+
+<h:form id="streetsForm" rendered="#{sessionBean.isCurrentPage('streets')}" layout="block">
+
+    <f:passThroughAttribute name="autocomplete" value="off"/>
+<!--    <p:defaultCommand target="btnSend" />-->
+    <p:panel header="The Streets">
+
+        <p:panel id="streetView" header="Street View">
+
+            <h:panelGroup id="chatContentDiv" layout="block">
+
+            </h:panelGroup>
+
+            <h:form id="chatForm" prependId="false">
+
+                <p:inputText id="chatInputText" value="#{streetsBean.userCommand}" size="50" />
+                <p:commandButton value="Send" id="btnSend" async="true" actionListener="#{streetsBean.sendCommand}"
+                                 update="@form" styleClass="rightAlign" icon="ui-icon-circle-arrow-e"/>
+
+            </h:form>
+
+        </p:panel>
+
+    </p:panel>
+    <br/>
+</h:form>
+<f:websocket channel="mainChannel" onmessage="socketListener" />
+</html>

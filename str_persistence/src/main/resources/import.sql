@@ -144,6 +144,7 @@ insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (1, 'S
 insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (2, 'SYS_ADMIN',1);
 insert ignore into str_auth_group(auth_group_id, name, is_enabled) values (3, 'SYS_USER',1);
 
+insert ignore into str_role(name, is_enabled) values ('ROLE_STREETS', 1);
 insert ignore into str_role(name, is_enabled) values ('ROLE_ADVANCED_MANAGE_USERS', 1);
 insert ignore into str_role(name, is_enabled) values ('ROLE_MANAGE_USERS', 1);
 insert ignore into str_role(name, is_enabled) values ('ROLE_MANAGE_SYSTEM', 1);
@@ -152,15 +153,15 @@ insert ignore into str_role(name, is_enabled) values ('ROLE_VIEW_SINGLE_REPORTS'
 insert ignore into str_role(name, is_enabled) values ('ROLE_CHANGE_SETTINGS', 1);
 
 /* Insert all roles for SUPER_USER */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SUPER_USER' and sr.name LIKE '%';
+insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg, str_role sr where sg.name = 'SUPER_USER' and sr.name LIKE '%';
 
 /* Insert all roles for SYS_ADMIN */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SYS_ADMIN' and (sr.name LIKE 'ROLE_MANAGE_%' or sr.name LIKE 'ROLE_CHANGE_%' or sr.name LIKE 'ROLE_VIEW_%');
+insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg, str_role sr where sg.name = 'SYS_ADMIN' and (sr.name = 'ROLE_STREETS' or sr.name LIKE 'ROLE_MANAGE_%' or sr.name LIKE 'ROLE_CHANGE_%' or sr.name LIKE 'ROLE_VIEW_%');
 
 /* Insert roles for SYSTEM_AGENT */
-insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg,str_role sr where sg.name = 'SYS_USER' and (sr.name = 'ROLE_CHANGE_SETTINGS' or sr.name = 'ROLE_VIEW_SINGLE_REPORTS');
+insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) select sg.auth_group_id,sr.role_id,CONCAT(sg.name,'_',sr.name),1 from str_auth_group sg, str_role sr where sg.name = 'SYS_USER' and (sr.name = 'ROLE_STREETS' or sr.name = 'ROLE_CHANGE_SETTINGS' or sr.name = 'ROLE_VIEW_SINGLE_REPORTS');
 
-insert ignore into str_user(first_name,last_name,username,email,msisdn,salt,user_status_id,country_id,language_id,pin,pin_tries) values ('Tsungai','Kaviya','admin','tsungai.kaviya@gmail.com','263785107830','kX4NDlXT2ySxR7e3',30,2,1,'8e77fa77fa7c4c6488fedaaeabf595a09a96cdff2e9196668e817a012f812',0);
+insert ignore into str_user(first_name,last_name,username,email,msisdn,salt,user_status_id,country_id,language_id,pin,pin_tries) values ('Tsungai','Kaviya','admin','tsungai.kaviya@gmail.com','263785107830','kX4NDlXT2ySxR7e3',30,1,1,'8e77fa77fa7c4c6488fedaaeabf595a09a96cdff2e9196668e817a012f812',0);
 insert ignore into str_auth_user (str_user_id,channel_id,auth_group_id,device_id,registration_date,last_auth_date,last_login_date) SELECT su.str_user_id,2,1,null,sysdate(),NULL,NULL FROM str_user su WHERE su.username = 'admin';
 insert ignore into str_wallet (wallet_id, current_balance) values (1, '0.00');
 update str_user set wallet_id = 1 where str_user_id = 1;

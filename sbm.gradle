@@ -212,7 +212,8 @@ project.ext.libraries = [
 	/* ################################################### JSF #################################################### */
 	jsf_api:			[ group: 'com.sun.faces',	    name: 'jsf-api',			version: project.jsf_version ],
 	jsf_impl:			[ group: 'com.sun.faces',	    name: 'jsf-impl',			version: project.jsf_version ],
-    cdi_api:			[ group: 'javax.enterprise',	name: 'cdi-api',			version: '2.0-PFD' ],
+	cdi_api:			[ group: 'javax.enterprise',	name: 'cdi-api',			version: '2.0-PFD' ],
+	jsf:				[ group: 'javax.faces',	    	name: 'javax.faces-api',	version: '2.3' ],
 
 	/* ################################################### javax ################################################## */
 	javax_servlet_api:	[ group: 'javax.servlet',		name: 'javax.servlet-api',	version: '3.0.1' ],
