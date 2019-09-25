@@ -1,5 +1,7 @@
 package net.streets.core.contract;
 
+import net.streets.persistence.entity.complex_type.str_user;
+
 /***************************************************************************
  *                                                                         *
  * Created:     25 / 09 / 2019                                             *
@@ -14,12 +16,12 @@ public class StrMessage {
 	public enum MESSAGE_TYPE { MSG_STREETS, MSG_PRIVATE }
 
 	MESSAGE_TYPE message_type;
-	Long recipientUserID;
+	str_user recipient;
 	String message;
 
-	public StrMessage(MESSAGE_TYPE message_type, Long recipientUserID, String message) {
+	public StrMessage(MESSAGE_TYPE message_type, str_user recipient, String message) {
 		this.message_type = message_type;
-		this.recipientUserID = recipientUserID;
+		this.recipient = recipient;
 		this.message = message;
 	}
 
@@ -27,9 +29,9 @@ public class StrMessage {
 
 	public void setMessage_type(MESSAGE_TYPE message_type) { this.message_type = message_type; }
 
-	public Long getRecipientUserID() { return recipientUserID; }
+	public str_user getRecipient() { return recipient; }
 
-	public void setRecipientUserID(Long recipientUserID) { this.recipientUserID = recipientUserID; }
+	public void setRecipient(str_user recipient) { this.recipient = recipient; }
 
 	public String getMessage() { return message; }
 

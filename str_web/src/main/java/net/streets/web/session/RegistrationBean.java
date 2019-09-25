@@ -65,7 +65,7 @@ public class RegistrationBean implements Serializable {
         var requestResponseLog = new str_request_response_log(
                 fromEnum(WEB), fromEnum(USER_REGISTRATION), registrationData.toPrintableString()).save();
 
-        if (!registrationData.getPassword().equals(registrationData.getConfirmPassword())) {
+        if (!registrationData.getPin().equals(registrationData.getConfirmPin())) {
             getCurrentInstance().addMessage(null, new FacesMessage(SEVERITY_ERROR,
                 "Registration Failed: Password and password confirmation must match",
                 "Registration Failed: Password and password confirmation must match"));
@@ -122,7 +122,7 @@ public class RegistrationBean implements Serializable {
 
         str_user newUser = new str_user(registrationData.getFirstName(), registrationData.getLastName(),
                 null, registrationData.getUsername(),
-                null, 0, null, registrationData.getEmail(), registrationData.getMsisdn(),
+                registrationData.getPin(), 0, null, registrationData.getEmail(), registrationData.getMsisdn(),
                 fromEnum(ACC_INACTIVE), countryFromString(getStrConfigDao().getConfig(CONFIG_DEFAULT_COUNTRY)),
                 languageFromString(getStrConfigDao().getConfig(CONFIG_DEFAULT_LANGUAGE)));
 

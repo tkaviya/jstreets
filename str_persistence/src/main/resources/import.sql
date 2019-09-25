@@ -26,7 +26,7 @@ insert ignore into str_config(config_id,is_enabled,config_name,config_value,conf
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (100,1,'CONFIG_INITIAL_AUTH_GROUP','SYS_USER','Initial auth group for upon user registrations');
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (101,1,'CONFIG_INITIAL_POCKET_BALANCE','500','Initial amount in pocket upon registration');
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (102,1,'CONFIG_INITIAL_ACCOUNT_BALANCE','10000','Initial amount in account upon registration');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (103,1,'CONFIG_INITIAL_ENERGY','100','Initial current energy upon registration');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (103,1,'CONFIG_INITIAL_CURRENT_ENERGY','100','Initial current energy upon registration');
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (104,1,'CONFIG_INITIAL_MAX_ENERGY','100','Initial max energy upon registration');
 #company settings
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (120,1,'CONFIG_DOMAIN_NAME','imthestreets.com','Domain name for where the system is hosted');
@@ -39,7 +39,7 @@ insert ignore into str_config(config_id,is_enabled,config_name,config_value,conf
 insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (181,1,'CONFIG_DEFAULT_REPORTING_DAYS','7','Number of days to show in history by default');
 
 #module configurations
-insert ignore into str_module_config(module_name, module_run_times) VALUES ('BankAccount', '04:33,04:35,04:40,04:43,04:45,04:50,05:00,05:10,05:20,05:30,05:40,05:50,05:55')
+insert ignore into str_module_config(module_name, module_run_times) VALUES ('BankAccount', '12:30,12:35,12:37,12:39,12:45,13:00,13:30,13:36,13:38,13:40,13:43,13:50,13:55');
 
 insert ignore into str_country(id,name,is_enabled,iso_code_2,iso_code_3,dialing_code) values (1,'ZIMBABWE',0,'ZW','ZWE',263);
 
@@ -60,38 +60,13 @@ insert ignore into str_event_type(id,name,is_enabled) values (1002,'USER_CREATE'
 insert ignore into str_event_type(id,name,is_enabled) values (1003,'USER_LOGIN',1);
 insert ignore into str_event_type(id,name,is_enabled) values (1004,'USER_LOGOUT',1);
 insert ignore into str_event_type(id,name,is_enabled) values (1005,'USER_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1006,'USER_PASSWORD_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1007,'USER_PASSWORD_RESET',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1008,'USER_PIN_RESET',1);
+insert ignore into str_event_type(id,name,is_enabled) values (1006,'USER_PIN_UPDATE',1);
+insert ignore into str_event_type(id,name,is_enabled) values (1007,'USER_PIN_RESET',1);
 
 insert ignore into str_event_type(id,name,is_enabled) values (1100,'WALLET_LOAD',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1101,'WALLET_CASHOUT',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1102,'WALLET_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1103,'WALLET_GET_CASHOUT_ACCOUNTS',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1104,'WALLET_ADD_CASHOUT_ACCOUNT',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1105,'WALLET_DISABLE_CASHOUT_ACCOUNT',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1106,'WALLET_GROUP_CREATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1107,'WALLET_GROUP_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1108,'WALLET_GROUP_VOUCHER_DISCOUNT_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1109,'WALLET_GROUP_TRANSFER_CHARGE_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1110,'WALLET_SWIPE_IN',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1111,'WALLET_TRANSFER',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1112,'WALLET_HISTORY',1);
-
-insert ignore into str_event_type (id,name,is_enabled) values (1200,'VOUCHER_IMPORT',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1201,'VOUCHER_CREATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1202,'VOUCHER_PURCHASE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1203,'VOUCHER_UPDATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1204,'VOUCHER_TYPE_CREATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1205,'VOUCHER_TYPE_UPDATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1206,'VOUCHER_PURCHASE_QUERY',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1207,'VOUCHER_PROVIDER_CREATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1208,'VOUCHER_PROVIDER_UPDATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1209,'SERVICE_PROVIDER_CREATE',1);
-insert ignore into str_event_type (id,name,is_enabled) values (1210,'SERVICE_PROVIDER_UPDATE',1);
-
-insert ignore into str_event_type(id,name,is_enabled) values (1300,'DEVICE_POS_MACHINE_UPDATE',1);
-insert ignore into str_event_type(id,name,is_enabled) values (1301,'DEVICE_PHONE_UPDATE',1);
+insert ignore into str_event_type(id,name,is_enabled) values (1101,'WALLET_UPDATE',1);
+insert ignore into str_event_type(id,name,is_enabled) values (1102,'WALLET_TRANSFER',1);
+insert ignore into str_event_type(id,name,is_enabled) values (1103,'WALLET_HISTORY',1);
 
 insert ignore into str_language(name,is_enabled) values ('ENGLISH',1);
 

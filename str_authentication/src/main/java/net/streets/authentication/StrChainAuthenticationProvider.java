@@ -215,7 +215,7 @@ public abstract class StrChainAuthenticationProvider {
                 )
         ));
 
-        logger.info(format("Found %s results for auth_group %s role %s",
+        logger.fine(format("Found %s results for auth_group %s role %s",
                 results == null ? 0 : results.size(), strAuthUser.getAuth_group(), role));
 
         return results != null && results.size() >= 1;

@@ -39,6 +39,7 @@ public class BankAccountEngine extends StreetsModule {
 		var userAttributes = getEntityManagerRepo().findAll(str_user_attributes.class);
 
 		BigDecimal totalInterest = new BigDecimal(0);
+		richestPlayers.clear();
 		for (var userAttr : userAttributes) {
 			var initialAmount = userAttr.getAccount_balance();
 			var interest = userAttr.getAccount_balance().multiply(new BigDecimal(0.05));

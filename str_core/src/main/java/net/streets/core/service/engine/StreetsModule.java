@@ -17,7 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Logger;
 
-import static java.lang.Integer.*;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 import static java.util.concurrent.Executors.newScheduledThreadPool;
 import static java.util.concurrent.TimeUnit.MINUTES;
@@ -127,7 +127,7 @@ public abstract class StreetsModule implements Runnable {
 	}
 
 	protected void broadcastPrivate(String text, str_user user) {
-		var message = new StrMessage(MSG_PRIVATE, user.getId(), this.moduleName + "# " + text);
+		var message = new StrMessage(MSG_PRIVATE, user, this.moduleName + "# " + text);
 		moduleEvent.firePropertyChange(new PropertyChangeEvent(this, null, null, message));
 	}
 }

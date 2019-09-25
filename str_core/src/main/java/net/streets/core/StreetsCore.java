@@ -18,13 +18,13 @@ import java.util.logging.Logger;
  ***************************************************************************/
 
 @Component
-public class Streets implements PropertyChangeListener {
+public class StreetsCore implements PropertyChangeListener {
 
-	private static final Logger logger = Logger.getLogger(Streets.class.getSimpleName());
+	private static final Logger logger = Logger.getLogger(StreetsCore.class.getSimpleName());
 	private final PropertyChangeSupport moduleEvent = new PropertyChangeSupport(this);
 
 	@Autowired
-	public Streets(BankAccountEngine bankAccountEngine){
+	public StreetsCore(BankAccountEngine bankAccountEngine){
 
 		logger.info("Initializing Streets Modules");
 		bankAccountEngine.addPropertyChangeListener(this).start();
@@ -34,7 +34,11 @@ public class Streets implements PropertyChangeListener {
 		);
 	}
 
-	public Streets addPropertyChangeListener(PropertyChangeListener pcl) { moduleEvent.addPropertyChangeListener(pcl); return this; }
+	public StreetsCore addPropertyChangeListener(PropertyChangeListener pcl) {
+		logger.info("Adding property change listener " + pcl.getClass().getSimpleName());
+		moduleEvent.addPropertyChangeListener(pcl);
+		return this;
+	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {

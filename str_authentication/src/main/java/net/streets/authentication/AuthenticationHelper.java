@@ -52,12 +52,12 @@ class AuthenticationHelper {
 	            if (!isValidEmail(userData.getEmail())) {
 		            return new StrResponseObject<str_user>(INPUT_INVALID_EMAIL).setMessage("Invalid email (" + userData.getEmail() + ") specified");
 	            } else if (!isValidPin(userData.getPin())) {
-		            return new StrResponseObject<str_user>(INPUT_INVALID_PASSWORD).setMessage("Invalid password specified");
+		            return new StrResponseObject<str_user>(INPUT_INVALID_PASSWORD).setMessage("Invalid pin specified");
 	            } else return new StrResponseObject<str_user>(SUCCESS).setResponseObject(userData);
             }
 	        case SMART_PHONE: {
 		        if (!isValidPin(userData.getPin())) {
-			        return new StrResponseObject<str_user>(INPUT_INVALID_PASSWORD).setMessage("Invalid pin number specified");
+			        return new StrResponseObject<str_user>(INPUT_INVALID_PASSWORD).setMessage("Invalid pin specified");
 		        } else return new StrResponseObject<str_user>(SUCCESS).setResponseObject(userData);
 	        }
             default:

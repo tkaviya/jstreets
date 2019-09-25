@@ -17,7 +17,7 @@
     <div class="centerAlign">
         <h:form id="registrationForm">
             <f:passThroughAttribute name="autocomplete" value="off"/>
-            <p:defaultCommand target="btnRegister" />
+<!--            <p:defaultCommand target="btnRegister" />-->
             <p:panel header="Register onto #{systemSettings.systemName} Control Center" style="width: 900px;" styleClass="centerAlign">
                 <p class="centerAlign">POWERED BY</p>
                 <p class="centerAlign"><img src="resources/images/#{systemSettings.systemNameToLower}/logo.png" width="276px"
@@ -66,20 +66,20 @@
                     </p:inputText>
                     <p:message for="username" id="msgUsername" display="icon" styleClass="rightAlign"/>
 
-                    <p:outputLabel for="password" value="Password:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:password id="password" value="#{registration.password}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.passwordValidator"  />
-                        <p:ajax update="msgPassword" event="keyup" />
+                    <p:outputLabel for="password" value="Pin:" styleClass="leftAlign" style="width: 200px"/>
+                    <p:password id="password" value="#{registration.pin}" required="true" styleClass="inputField">
+                        <f:validator validatorId="custom.pinValidator"  />
+                        <p:ajax update="msgPin" event="keyup" />
                     </p:password>
-                    <p:message for="password" id="msgPassword" display="icon" styleClass="rightAlign"/>
+                    <p:message for="password" id="msgPin" display="icon" styleClass="rightAlign"/>
                     <p:spacer/><p:spacer/><p:spacer/>
 
-                    <p:outputLabel for="confirmPassword" value="Confirm Password:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:password id="confirmPassword" value="#{registration.confirmPassword}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.passwordValidator"  />
-                        <p:ajax update="msgConfirmPassword" event="keyup" />
+                    <p:outputLabel for="confirmPin" value="Confirm Pin:" styleClass="leftAlign" style="width: 200px"/>
+                    <p:password id="confirmPin" value="#{registration.confirmPin}" required="true" styleClass="inputField">
+                        <f:validator validatorId="custom.pinValidator"  />
+                        <p:ajax update="msgConfirmPin" event="keyup" />
                     </p:password>
-                    <p:message for="confirmPassword" id="msgConfirmPassword" display="icon" styleClass="rightAlign"/>
+                    <p:message for="confirmPin" id="msgConfirmPin" display="icon" styleClass="rightAlign"/>
                     <p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/>
 
                     <p:button id="btnGoToLogin" outcome="login.xhtml" value="Go to Login" icon="ui-icon-person"

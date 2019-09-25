@@ -20,22 +20,6 @@ import java.io.Serializable;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "request")
 public class Registration implements PrintableStringClass, Serializable {
 
-    @PlainTextConstraint
-    private String companyName;
-    @AddressConstraint
-    private String addressLine1;
-    @AddressConstraint
-    private String addressLine2;
-    @NameConstraint
-    private String addressCity;
-    @PlainTextConstraint
-    private String vatNumber;
-    @PlainTextConstraint
-    private String registrationNumber;
-    @MsisdnConstraint
-    private String phone1;
-    @MsisdnConstraint
-    private String phone2;
     @UsernameConstraint
     private String username;
     @NameConstraint
@@ -46,74 +30,10 @@ public class Registration implements PrintableStringClass, Serializable {
     private String email;
     @MsisdnConstraint
     private String msisdn;
-    @PasswordConstraint
-    private String password;
-    @PasswordConstraint
-    private String confirmPassword;
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-    public String getAddressCity() {
-        return addressCity;
-    }
-
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
-    }
-
-    public String getPhone1() {
-        return phone1;
-    }
-
-    public void setPhone1(String phone1) {
-        this.phone1 = phone1;
-    }
-
-    public String getPhone2() {
-        return phone2;
-    }
-
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
-    }
-
-    public String getVatNumber() {
-        return vatNumber;
-    }
-
-    public void setVatNumber(String vatNumber) {
-        this.vatNumber = vatNumber;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
+    @PinConstraint
+    private String pin;
+    @PinConstraint
+    private String confirmPin;
 
     public String getUsername() {
         return username;
@@ -155,19 +75,19 @@ public class Registration implements PrintableStringClass, Serializable {
         this.msisdn = msisdn;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPin() {
+        return pin;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getConfirmPin() {
+        return confirmPin;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setConfirmPin(String confirmPin) {
+        this.confirmPin = confirmPin;
     }
 }

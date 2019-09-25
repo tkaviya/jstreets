@@ -40,8 +40,6 @@ public class NameValidator implements Validator, ClientValidator {
                     "message", NAME_VALIDATION_ERROR.replace("name", "first name"));
             changeAnnotationValue(Registration.class.getDeclaredField("lastName").getAnnotations()[0],
                     "message", NAME_VALIDATION_ERROR.replace("name", "last name"));
-            changeAnnotationValue(Registration.class.getDeclaredField("addressCity").getAnnotations()[0],
-                    "message", NAME_VALIDATION_ERROR.replace("name", "city"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
