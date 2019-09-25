@@ -2,7 +2,7 @@ package net.streets.web.converters;
 
 import net.streets.persistence.entity.enumeration.str_response_code;
 
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,7 +20,7 @@ import static net.streets.utilities.StrValidator.isNumeric;
  * Contact:     tsungai.kaviya@gmail.com                                   *
  *                                                                         *
  ***************************************************************************/
-@ManagedBean
+@ApplicationScoped
 @FacesConverter(value = "rcConverter")
 public class ResponseCodeConverter implements Converter {
 

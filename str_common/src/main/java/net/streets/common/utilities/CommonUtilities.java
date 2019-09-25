@@ -126,15 +126,15 @@ public class CommonUtilities {
         return str;
     }
 
-    public static String formatDoubleToMoney(final double value, final String currencyStrbol) {
+    public static String formatDoubleToMoney(final double value, final String currencySymbol) {
         DecimalFormat df = new DecimalFormat("###,##0.00");
 
         String formattedString = df.format(value);
 
         if (!formattedString.startsWith("-")) {
-            return (currencyStrbol == null ? "" : currencyStrbol) + formattedString;
+            return (currencySymbol == null ? "" : currencySymbol) + formattedString;
         } else {
-            return "-" + (currencyStrbol == null ? "" : currencyStrbol) + formattedString.replaceFirst("-", "");
+            return "-" + (currencySymbol == null ? "" : currencySymbol) + formattedString.replaceFirst("-", "");
         }
     }
 
@@ -142,8 +142,8 @@ public class CommonUtilities {
         return formatDoubleToMoney(value.doubleValue(), null);
     }
 
-    public static String formatBigDecimalToMoney(final BigDecimal value, final String currencyStrbol) {
-        return formatDoubleToMoney(value.doubleValue(), currencyStrbol);
+    public static String formatBigDecimalToMoney(final BigDecimal value, final String currencySymbol) {
+        return formatDoubleToMoney(value.doubleValue(), currencySymbol);
     }
 
     public static String formatDoubleToMoney(final double value) {

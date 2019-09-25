@@ -1,6 +1,5 @@
 package net.streets.utilities;
 
-import net.streets.utilities.concurrency.ThreadPoolManager;
 import net.streets.utilities.mail.EMailer;
 
 import java.io.IOException;
@@ -10,7 +9,9 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import static net.streets.persistence.enumeration.StrConfig.CONFIG_EMAIL_ALERT_TO;
+import static net.streets.persistence.enumeration.StrConfig.CONFIG_SYSTEM_NAME;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
+import static net.streets.utilities.concurrency.ThreadPoolManager.schedule;
 import static net.streets.utilities.mail.EMailer.DEFAULT_CONTENT_TYPE;
 
 /**
@@ -51,22 +52,22 @@ public class NetworkUtilities {
         }
     }
 
-    public static void sendEmailAlert(String strSystem, String alertSubject, String alertMessage) {
-        logger.info("Sending alert email from " + strSystem + " with subject: " + alertSubject);
+    public static void sendEmailAlert(String alertSubject, String alertMessage) {
+        logger.info("Sending alert email from " + getStrConfigDao().getConfig(CONFIG_SYSTEM_NAME) + " with subject: " + alertSubject);
         logger.info(alertMessage);
-        ThreadPoolManager.schedule(new EMailer(
-                new String[]{getStrConfigDao().getConfig(CONFIG_EMAIL_ALERT_TO)},
-                strSystem + " alert! " + alertSubject, alertMessage, DEFAULT_CONTENT_TYPE));
+        schedule(new EMailer(new String[]{getStrConfigDao().getConfig(CONFIG_EMAIL_ALERT_TO)},
+            getStrConfigDao().getConfig(CONFIG_SYSTEM_NAME) + " alert! " + alertSubject,
+            alertMessage, DEFAULT_CONTENT_TYPE));
     }
 
     public static void sendEmail(String strSystem, String recipient, String emailSubject, String emailMessage) {
         logger.info("Sending email from " + strSystem + " with subject: " + emailSubject);
-        ThreadPoolManager.schedule(new EMailer(new String[]{recipient}, emailSubject, emailMessage, DEFAULT_CONTENT_TYPE));
+        schedule(new EMailer(new String[]{recipient}, emailSubject, emailMessage, DEFAULT_CONTENT_TYPE));
     }
 
     public static void sendEmail(String strSystem, String[] recipients, String emailSubject, String emailMessage,
                                  String contentType) {
         logger.info("Sending email from " + strSystem + " with subject: " + emailSubject);
-        ThreadPoolManager.schedule(new EMailer(recipients, emailSubject, emailMessage, contentType));
+        schedule(new EMailer(recipients, emailSubject, emailMessage, contentType));
     }
 }

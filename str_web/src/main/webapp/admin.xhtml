@@ -11,9 +11,33 @@
 </f:metadata>
 
 <h:head>
-    <title>#{systemSettings.systemName} Control Center - Admin</title>
+    <title>#{systemSettings.systemName} - Admin</title>
     <h:outputStylesheet library="css" name="style.css"  />
     <link rel="icon" type="image/x-icon" href="resources/images/#{systemSettings.systemNameToLower}/favicon.ico"/>
+
+    <script type="text/javascript">
+
+		function streetsSocketListener(message, channel, event) {
+			var m = "message:" + message + ", channel:" + channel + ", event:" + event;
+			console.log(m);
+			var ul = document.getElementById("streetsMessages");
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(message));
+			ul.appendChild(li);
+		}
+
+		function privateSocketListener(message, channel, event) {
+			var m = "message:" + message + ", channel:" + channel + ", event:" + event;
+			console.log(m);
+			var ul = document.getElementById("privateMessages");
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(message));
+			li.style.borderTop = "1px solid #ccc";
+			ul.appendChild(li);
+		}
+
+    </script>
+
 </h:head>
 
 <h:body>

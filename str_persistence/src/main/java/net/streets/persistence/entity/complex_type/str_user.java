@@ -1,6 +1,5 @@
 package net.streets.persistence.entity.complex_type;
 
-import net.streets.persistence.entity.complex_type.wallet.str_wallet;
 import net.streets.persistence.entity.enumeration.str_country;
 import net.streets.persistence.entity.enumeration.str_language;
 import net.streets.persistence.entity.enumeration.str_response_code;
@@ -37,8 +36,8 @@ public class str_user extends str_entity<str_user> {
     @JoinColumn(name = "user_status_id")
     private str_response_code user_status;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wallet_id")
-    private str_wallet wallet;
+    @JoinColumn(name = "user_attributes_id")
+    private str_user_attributes user_attributes;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private str_country country;
@@ -51,7 +50,7 @@ public class str_user extends str_entity<str_user> {
     public str_user(String first_name, String last_name, Date date_of_birth, String username,
                     String pin, Integer pin_tries, String salt, String email,
                     String msisdn, str_response_code user_status,
-                    str_wallet wallet, str_country country, str_language language) {
+                    str_user_attributes user_attributes, str_country country, str_language language) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
@@ -62,7 +61,7 @@ public class str_user extends str_entity<str_user> {
         this.email = email;
         this.msisdn = msisdn;
         this.user_status = user_status;
-        this.wallet = wallet;
+        this.user_attributes = user_attributes;
         this.country = country;
         this.language = language;
     }
@@ -155,12 +154,12 @@ public class str_user extends str_entity<str_user> {
         this.user_status = user_status;
     }
 
-    public str_wallet getWallet() {
-        return wallet;
+    public str_user_attributes getUser_attributes() {
+        return user_attributes;
     }
 
-    public str_user setWallet(str_wallet wallet) {
-        this.wallet = wallet;
+    public str_user setUser_attributes(str_user_attributes user_attributes) {
+        this.user_attributes = user_attributes;
         return this;
     }
 

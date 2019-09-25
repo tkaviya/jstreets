@@ -33,7 +33,6 @@ import static net.streets.utilities.mail.EMailer.createMultipartMessage;
  *                                                                         *
  ***************************************************************************/
 
-@ManagedBean
 public abstract class JSFExportable {
 
     private static final Logger logger = Logger.getLogger(JSFExportable.class.getSimpleName());

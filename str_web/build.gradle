@@ -39,6 +39,10 @@ dependencies {
 //    compile libraries.jsf_impl
     compile libraries.cdi_api
     compile libraries.jsf
+    compile libraries.glassfish_jsf
+    compile libraries.wildfly_jsf
+//    compile libraries.jboss_weld_core
+//    compile libraries.jboss_weld_shaded
     compile libraries.javax_servlet_jstl
     compile libraries.javax_servlet_api
     compile libraries.javax_validation

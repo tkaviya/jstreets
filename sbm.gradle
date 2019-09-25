@@ -59,6 +59,9 @@ subprojects {
         maven {
             url "http://repository.primefaces.org"
         }
+		maven {
+			url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
+		}
     }
 
 	buildscript {
@@ -124,7 +127,8 @@ project.ext.libraries = [
 	spring_tx:			[ group: 'org.springframework', name: 'spring-tx',				version: project.spring_version ],
 	spring_test:		[ group: 'org.springframework', name: 'spring-test',			version: project.spring_version ],
 	spring_expression:  [ group: 'org.springframework', name: 'spring-expression',		version: project.spring_version ],
-	spring_hateoas:  [ group: 'org.springframework.hateoas', name: 'spring-hateoas',		version: '0.3.0.RELEASE' ],
+	spring_hateoas:  	[ group: 'org.springframework.hateoas', name: 'spring-hateoas',		version: '0.3.0.RELEASE' ],
+	spring_faces:  		[ group: 'org.springframework.webflow', name: 'spring-faces',		version: '2.5.1.RELEASE' ],
 	spring_javaconfig:  [ group: 'org.springframework.javaconfig', name: 'spring-javaconfig',		version: '1.0.0.m3' ],
 
 	reactive_streams:  [ group: 'org.reactivestreams', name: 'reactive-streams',		version: '1.0.1' ],
@@ -144,6 +148,10 @@ project.ext.libraries = [
 	jersey_server:  [ group: 'com.sun.jersey',			name: 'jersey-server',		version: project.jersey_version ],
 	jersey_servlet:	[ group: 'com.sun.jersey',			name: 'jersey-servlet',		version: project.jersey_version ],
 	jersey_spring:  [ group: 'com.sun.jersey.contribs',	name: 'jersey-spring',		version: project.jersey_version ],
+
+	/* #################################################### JBoss ################################################### */
+	jboss_weld_core:		[ group: 'org.jboss.weld.servlet',		name: 'weld-servlet-core',		version: '3.1.2.Final' ],
+	jboss_weld_shaded:		[ group: 'org.jboss.weld.servlet',		name: 'weld-servlet-shaded',	version: '3.1.2.Final' ],
 
 	/* ################################################## glassfish ################################################# */
 	glassfish_hk2:  		[ group: 'org.glassfish.hk2',	name: 'hk2',		version: project.glassfish_hk2_version ],
@@ -211,9 +219,11 @@ project.ext.libraries = [
 
 	/* ################################################### JSF #################################################### */
 	jsf_api:			[ group: 'com.sun.faces',	    name: 'jsf-api',			version: project.jsf_version ],
-	jsf_impl:			[ group: 'com.sun.faces',	    name: 'jsf-impl',			version: project.jsf_version ],
+	jsf_impl:			[ group: 'com.sun.faces',	    name: 'jsf-impl',			version: '2.3.9.SP02' ],
 	cdi_api:			[ group: 'javax.enterprise',	name: 'cdi-api',			version: '2.0-PFD' ],
 	jsf:				[ group: 'javax.faces',	    	name: 'javax.faces-api',	version: '2.3' ],
+	glassfish_jsf:		[ group: 'org.glassfish',	    name: 'javax.faces',		version: '2.3.9' ],
+	wildfly_jsf:		[ group: 'org.wildfly',	    	name: 'wildfly-jsf',		version: '17.0.1.Final' ],
 
 	/* ################################################### javax ################################################## */
 	javax_servlet_api:	[ group: 'javax.servlet',		name: 'javax.servlet-api',	version: '3.0.1' ],
@@ -229,7 +239,7 @@ project.ext.libraries = [
     javax_validation:   [ group: 'javax.validation',    name: 'validation-api',     version: '1.0.0.GA' ],
 
 	/* ################################################ web themes ################################################ */
-    theme_pf:	    	[ group: 'org.primefaces',              name: 'primefaces',		        version: '6.1' ],
+    theme_pf:	    	[ group: 'org.primefaces',              name: 'primefaces',		        version: '7.0' ],
     theme_pf_all:		[ group: 'org.primefaces.themes',       name: 'all-themes',		        version: '1.0.10' ],
     theme_pf_black_tie: [ group: 'org.primefaces.themes',       name: 'black-tie',		        version: '1.0.10' ],
     theme_pf_extensions:[ group: 'org.primefaces.extensions',   name: 'primefaces-extensions',  version: '6.1.1' ],

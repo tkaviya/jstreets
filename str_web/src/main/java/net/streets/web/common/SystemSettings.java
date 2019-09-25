@@ -2,7 +2,7 @@ package net.streets.web.common;
 
 import org.springframework.stereotype.Component;
 
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
 
 import static net.streets.persistence.enumeration.StrConfig.CONFIG_SYSTEM_NAME;
 import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
@@ -15,7 +15,7 @@ import static net.streets.persistence.helper.DaoManager.getStrConfigDao;
  *                                                                         *
  ***************************************************************************/
 
-@ManagedBean
+@ApplicationScoped
 @Component
 public class SystemSettings {
 

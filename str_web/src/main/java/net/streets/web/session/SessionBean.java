@@ -1,6 +1,7 @@
 package net.streets.web.session;
 
 import net.streets.authentication.WebAuthenticationProvider;
+import net.streets.core.Streets;
 import net.streets.persistence.entity.complex_type.log.str_request_response_log;
 import net.streets.persistence.entity.complex_type.str_auth_user;
 import net.streets.persistence.entity.enumeration.str_auth_group;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
@@ -39,10 +42,12 @@ import static net.streets.web.common.SystemPages.*;
  * Contact:     tsungai.kaviya@gmail.com                                   *
  *                                                                         *
  ***************************************************************************/
+
 @Component
 @Scope("session")
 public class SessionBean implements Serializable {
 
+    private final Streets streets;
     private final Credentials credentials;
     private static final Logger logger = Logger.getLogger(SessionBean.class.getSimpleName());
     private str_auth_user strAuthUser;
@@ -53,7 +58,8 @@ public class SessionBean implements Serializable {
     private WebAuthenticationProvider authProvider;
 
     @Autowired
-    public SessionBean(Credentials credentials) {
+    public SessionBean(Streets streets, Credentials credentials) {
+        this.streets = streets;
         this.credentials = credentials;
         registerPageHandler(PAGE_LOGIN);
         registerPageHandler(PAGE_REGISTRATION);
@@ -68,7 +74,7 @@ public class SessionBean implements Serializable {
         registerPageHandler(PAGE_U_SETTINGS);
     }
 
-    static void registerPageHandler(SystemPage systemPage) {
+    private static void registerPageHandler(SystemPage systemPage) {
         logger.info("Registering new page " + systemPage.getIdString());
         pageHandlers.put(systemPage.getIdString(), systemPage);
     }
@@ -81,6 +87,8 @@ public class SessionBean implements Serializable {
     public SystemPage getCurrentPage() {
         return currentPage;
     }
+
+    public Streets getStreets() { return streets; }
 
     private SystemPage getDefaultStartPage(str_auth_group group) {
         if (group.equals(fromEnum(SUPER_USER)) || group.equals(fromEnum(SYS_ADMIN))) {
@@ -139,12 +147,10 @@ public class SessionBean implements Serializable {
     }
 
     public String goToRegistration() {
-        logger.info("Going to registration page");
         return setCurrentPage(PAGE_REGISTRATION).getBaseXHTML();
     }
 
     public String goToResetPassword() {
-        logger.info("Going to reset password page");
         return setCurrentPage(PAGE_RESET_PASSWORD).getBaseXHTML();
     }
 

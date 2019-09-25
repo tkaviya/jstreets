@@ -38,6 +38,7 @@ import static net.streets.web.common.SystemPages.PAGE_REGISTRATION;
  * Contact:     tsungai.kaviya@gmail.com                                   *
  *                                                                         *
  ***************************************************************************/
+
 @Component
 @Scope("session")
 public class RegistrationBean implements Serializable {
@@ -129,7 +130,7 @@ public class RegistrationBean implements Serializable {
                 requestResponseLog, newUser.getUsername(), newUser.getPin(), null);
 
         var registrationResponse = webAuthenticationProvider.registerWebUser(newUser,
-            findByName(str_auth_group.class, getStrConfigDao().getConfig(CONFIG_DEFAULT_WEB_AUTH_GROUP)), null);
+            findByName(str_auth_group.class, getStrConfigDao().getConfig(CONFIG_INITIAL_AUTH_GROUP)), null);
 
         if (registrationResponse.getResponseCode().equals(SUCCESS)) {
             getCurrentInstance().addMessage(null, new FacesMessage(SEVERITY_INFO,

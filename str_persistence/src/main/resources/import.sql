@@ -1,40 +1,45 @@
 # system settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (1,1,'system_name','Streets','System Name');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (2,1,'config_update_duration','1440','How often application re-reads configs from the database');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (3,1,'thread_core_pool_size','20','Number of initial threads available');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (4,1,'thread_max_pool_size','50','Maximum number threads available');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (5,1,'mutex_lock_wait_time','10000','Milliseconds to wait for mutex');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (6,1,'mutex_lock_wait_interval','1000','Milliseconds between checking mutex lock');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (1,1,'CONFIG_SYSTEM_NAME','Streets','System Name');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (2,1,'CONFIG_CONFIG_UPDATE_DURATION','1440','How often application re-reads configs from the database');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (3,1,'CONFIG_THREAD_CORE_POOL_SIZE','200','Number of initial threads available');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (4,1,'CONFIG_THREAD_MAX_POOL_SIZE','500','Maximum number threads available');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (5,1,'CONFIG_MUTEX_LOCK_WAIT_TIME','10000','Milliseconds to wait for mutex');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (6,1,'CONFIG_MUTEX_LOCK_WAIT_INTERVAL','1000','Milliseconds between checking mutex lock');
 # email settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (51,1,'email_protocol','smtp','Email protocol');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (52,1,'email_disable','false','Are all emails disabled?');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (53,1,'email_host','localhost','SMTP host');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (54,1,'email_port','25','SMTP port');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (55,1,'email_username','streets','SMTP username');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (56,1,'email_password','streets','SMTP password');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (57,1,'email_smtp_auth','false','Authenticate on SMTP');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (58,1,'email_smtp_starttls_enable','false','Enable TLS Authentication');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (59,1,'email_smtp_debug','false','Show SMTP debug messages?');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (60,1,'email_from','empowerttl@gmail.com','What is shown as sender from in emails from system');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (61,1,'email_alert_to','symbiosis.dev@gmail.com','Where email is sent when there is a system alert');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (51,1,'CONFIG_EMAIL_PROTOCOL','smtp','Email protocol');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (52,1,'CONFIG_EMAIL_DISABLE','false','Are all emails disabled?');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (53,1,'CONFIG_EMAIL_HOST','localhost','SMTP host');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (54,1,'CONFIG_EMAIL_PORT','25','SMTP port');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (55,1,'CONFIG_EMAIL_USERNAME','streets','SMTP username');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (56,1,'CONFIG_EMAIL_PASSWORD','streets','SMTP password');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (57,1,'CONFIG_EMAIL_SMTP_AUTH','false','Authenticate on SMTP');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (58,1,'CONFIG_EMAIL_SMTP_STARTTLS_ENABLE','false','Enable TLS Authentication');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (59,1,'CONFIG_EMAIL_SMTP_DEBUG','false','Show SMTP debug messages?');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (60,1,'CONFIG_EMAIL_FROM','empowerttl@gmail.com','What is shown as sender from in emails from system');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (61,1,'CONFIG_EMAIL_ALERT_TO','symbiosis.dev@gmail.com','Where email is sent when there is a system alert');
 #localization settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (80,1,'default_country','Zimbabwe','Default country for user registrations');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (81,1,'default_country_code','263','Default country code for phone numbers');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (82,1,'default_currency_symbol','USD','Default currency for transactions');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (83,1,'default_language','English','Default language for user registrations');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (80,1,'CONFIG_DEFAULT_COUNTRY','Zimbabwe','Default country for user registrations');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (81,1,'CONFIG_DEFAULT_COUNTRY_CODE','263','Default country code for phone numbers');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (82,1,'CONFIG_DEFAULT_CURRENCY_SYMBOL','USD','Default currency for transactions');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (83,1,'CONFIG_DEFAULT_LANGUAGE','English','Default language for user registrations');
 #registration settings
-# insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (100,1,'default_desktop_group','DESKTOP_AGENT','Default auth group for desktop user registrations');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (101,1,'default_web_auth_group','SYS_USER','Default auth group for web user registrations');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (105,1,'default_smart_phone_auth_group','MOBILE_USER','Default auth group for mobile user registrations');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (100,1,'CONFIG_INITIAL_AUTH_GROUP','SYS_USER','Initial auth group for upon user registrations');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (101,1,'CONFIG_INITIAL_POCKET_BALANCE','500','Initial amount in pocket upon registration');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (102,1,'CONFIG_INITIAL_ACCOUNT_BALANCE','10000','Initial amount in account upon registration');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (103,1,'CONFIG_INITIAL_ENERGY','100','Initial current energy upon registration');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (104,1,'CONFIG_INITIAL_MAX_ENERGY','100','Initial max energy upon registration');
 #company settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (120,1,'domain_name','imthestreets.com','Domain name for where the system is hosted');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (121,1,'contact_address','Harare','Company physical address');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (122,1,'support_email','symbiosis.dev@gmail.com','Company support email');
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (123,1,'support_phone','+263785107830','Company support phone number');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (120,1,'CONFIG_DOMAIN_NAME','imthestreets.com','Domain name for where the system is hosted');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (121,1,'CONFIG_CONTACT_ADDRESS','Harare','Company physical address');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (122,1,'CONFIG_SUPPORT_EMAIL','symbiosis.dev@gmail.com','Company support email');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (123,1,'CONFIG_SUPPORT_PHONE','+263785107830','Company support phone number');
 #security settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (160,1,'max_password_tries','5','Maximum password tries before blocking an account');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (160,1,'CONFIG_MAX_PASSWORD_TRIES','5','Maximum password tries before blocking an account');
 #web settings
-insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (181,1,'default_reporting_days','7','Number of days to show in history by default');
+insert ignore into str_config(config_id,is_enabled,config_name,config_value,config_description) values (181,1,'CONFIG_DEFAULT_REPORTING_DAYS','7','Number of days to show in history by default');
+
+#module configurations
+insert ignore into str_module_config(module_name, module_run_times) VALUES ('BankAccount', '04:33,04:35,04:40,04:43,04:45,04:50,05:00,05:10,05:20,05:30,05:40,05:50,05:55')
 
 insert ignore into str_country(id,name,is_enabled,iso_code_2,iso_code_3,dialing_code) values (1,'ZIMBABWE',0,'ZW','ZWE',263);
 
@@ -163,5 +168,5 @@ insert ignore into str_auth_group_role(auth_group_id,role_id,name,is_enabled) se
 
 insert ignore into str_user(first_name,last_name,username,email,msisdn,salt,user_status_id,country_id,language_id,pin,pin_tries) values ('Tsungai','Kaviya','admin','tsungai.kaviya@gmail.com','263785107830','kX4NDlXT2ySxR7e3',30,1,1,'8e77fa77fa7c4c6488fedaaeabf595a09a96cdff2e9196668e817a012f812',0);
 insert ignore into str_auth_user (str_user_id,channel_id,auth_group_id,device_id,registration_date,last_auth_date,last_login_date) SELECT su.str_user_id,2,1,null,sysdate(),NULL,NULL FROM str_user su WHERE su.username = 'admin';
-insert ignore into str_wallet (wallet_id, current_balance) values (1, '0.00');
-update str_user set wallet_id = 1 where str_user_id = 1;
+insert ignore into str_user_attributes (user_attributes_id, user_id, pocket_balance, account_balance, current_energy, max_energy) values (1, 1, 500.0, 10000.0, 100, 100);
+update str_user set user_attributes_id = 1 where str_user_id = 1;

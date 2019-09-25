@@ -4,7 +4,7 @@ import net.streets.common.structure.Pair;
 import net.streets.persistence.entity.enumeration.*;
 import org.springframework.stereotype.Component;
 
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
  *                                                                         *
  ***************************************************************************/
 
-@ManagedBean
+@ApplicationScoped
 @Component
 public class UpdateOptions implements Serializable {
 

@@ -143,7 +143,7 @@ public class StrTransformer {
     }
 
     public static String localDateTimeToString(LocalDateTime dateTime) {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(dateTime);
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(dateTime);
     }
 
     public static LocalDateTime dateToLocalDateTime(Date date) {

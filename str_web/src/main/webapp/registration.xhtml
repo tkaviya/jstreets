@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>#{systemSettings.systemName} Control Center - Registration</title>
+    <title>#{systemSettings.systemName} - Registration</title>
     <h:outputStylesheet library="css" name="style.css"  />
     <link rel="icon" type="image/x-icon" href="resources/images/#{systemSettings.systemNameToLower}/favicon.ico"/>
 </h:head>
@@ -17,78 +17,15 @@
     <div class="centerAlign">
         <h:form id="registrationForm">
             <f:passThroughAttribute name="autocomplete" value="off"/>
-            <!--<p:defaultCommand target="btnRegister" />-->
+            <p:defaultCommand target="btnRegister" />
             <p:panel header="Register onto #{systemSettings.systemName} Control Center" style="width: 900px;" styleClass="centerAlign">
                 <p class="centerAlign">POWERED BY</p>
                 <p class="centerAlign"><img src="resources/images/#{systemSettings.systemNameToLower}/logo.png" width="276px"
                                             alt="#{systemSettings.systemName} Logo"/></p>
                 <p:messages id="msgs" showDetail="false" />
 
-                <h:panelGrid id="companyRegisterPanel" columns="6" styleClass="centerAlign" style="width: 100%">
-                    <f:facet name="header">Company Details</f:facet>
-                    <p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/>
-                    <p:outputLabel for="companyName" value="Company Name:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="companyName" value="#{registration.companyName}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.plainTextValidator" />
-                        <p:ajax update="msgCompanyName" event="keyup" />
-                    </p:inputText>
-                    <p:message for="companyName" id="msgCompanyName" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="addressLine1" value="Address Line 1:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="addressLine1" value="#{registration.addressLine1}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.addressValidator" />
-                        <p:ajax update="msgAddress1" event="keyup" />
-                    </p:inputText>
-                    <p:message for="addressLine1" id="msgAddress1" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="companyPhone1" value="Company Phone 1:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="companyPhone1" value="#{registration.phone1}" required="false" styleClass="inputField">
-                        <f:validator validatorId="custom.msisdnValidator"  />
-                        <p:ajax update="msgCompanyPhone1" event="keyup" />
-                    </p:inputText>
-                    <p:message for="companyPhone1" id="msgCompanyPhone1" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="addressLine2" value="Address Line 2:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="addressLine2" value="#{registration.addressLine2}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.addressValidator" />
-                        <p:ajax update="msgAddress2" event="keyup" />
-                    </p:inputText>
-                    <p:message for="addressLine2" id="msgAddress2" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="companyPhone2" value="Company Phone 2:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="companyPhone2" value="#{registration.phone2}" required="false" styleClass="inputField">
-                        <f:validator validatorId="custom.msisdnValidator"  />
-                        <p:ajax update="msgCompanyPhone2" event="keyup" />
-                    </p:inputText>
-                    <p:message for="companyPhone2" id="msgCompanyPhone2" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="addressCity" value="City:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="addressCity" value="#{registration.addressCity}" required="true" styleClass="inputField">
-                        <f:validator validatorId="custom.nameValidator"  />
-                        <p:ajax update="msgAddressCity" event="keyup" />
-                    </p:inputText>
-                    <p:message for="addressCity" id="msgAddressCity" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="vatNumber" value="VAT Number:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="vatNumber" value="#{registration.vatNumber}" styleClass="inputField">
-                        <f:validator validatorId="custom.plainTextValidator"  />
-                        <p:ajax update="msgVATNumber" event="keyup" />
-                    </p:inputText>
-                    <p:message for="vatNumber" id="msgVATNumber" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="regNumber" value="Registration Number:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="regNumber" value="#{registration.registrationNumber}" styleClass="inputField">
-                        <f:validator validatorId="custom.plainTextValidator"  />
-                        <p:ajax update="msgRegNumber" event="keyup" />
-                    </p:inputText>
-                    <p:message for="regNumber" id="msgRegNumber" display="icon" styleClass="rightAlign"/>
-                    <p:spacer/><p:spacer/><p:outputLabel value="&#160;&#160;&#160;&#160;&#160;&#160;"/>
-                    <p:spacer/><p:spacer/><p:outputLabel value="&#160;&#160;&#160;&#160;&#160;&#160;"/>
-                </h:panelGrid>
-
-
-                <h:panelGrid id="adminRegisterPanel" columns="6" styleClass="centerAlign" style="width: 100%">
-                    <f:facet name="header">Account Admin Details</f:facet>
+                <h:panelGrid id="userRegisterPanel" columns="6" styleClass="centerAlign" style="width: 100%">
+                    <f:facet name="header">User Details</f:facet>
                     <p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/><p:spacer/>
                     <p:outputLabel for="firstName" value="First Name:" styleClass="leftAlign" style="width: 200px"/>
                     <p:inputText id="firstName" value="#{registration.firstName}" required="true" styleClass="inputField">
@@ -117,13 +54,6 @@
                         <p:ajax update="msgEmailAddress" event="keyup" />
                     </p:inputText>
                     <p:message for="emailAddress" id="msgEmailAddress" display="icon" styleClass="rightAlign"/>
-
-                    <p:outputLabel for="msisdn2" value="Phone number 2:" styleClass="leftAlign" style="width: 200px"/>
-                    <p:inputText id="msisdn2" value="#{registration.msisdn2}" required="false" styleClass="inputField">
-                        <f:validator validatorId="custom.msisdnValidator"  />
-                        <p:ajax update="msgMsisdn2" event="keyup" />
-                    </p:inputText>
-                    <p:message for="msisdn2" id="msgMsisdn2" display="icon" styleClass="rightAlign"/>
 
                     <p:spacer/><p:spacer/><p:outputLabel value="&#160;&#160;&#160;&#160;&#160;&#160;"/>
                     <p:spacer/><p:spacer/><p:outputLabel value="&#160;&#160;&#160;&#160;&#160;&#160;"/>

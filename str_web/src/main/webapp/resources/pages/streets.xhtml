@@ -1,44 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <script type="text/javascript">
-		function socketListener(message, channel, event) {
-			document.getElementById("chatContentDiv").innerHTML += message + "&lt;br/>";
-		}
-    </script>
-</h:head>
+
 <f:metadata>
     <f:event type="preRenderView" listener="#{sessionBean.checkValidSession}"/>
+    <f:event type="preRenderView" listener="#{streetsBean.setCurrentUser(sessionBean.strAuthUser.user)}"/>
+    <f:event type="preRenderView" listener="#{streetsBean.setStreetsBean(sessionBean.streets)}"/>
 </f:metadata>
 
 <h:form id="streetsForm" rendered="#{sessionBean.isCurrentPage('streets')}" layout="block">
-
-    <f:passThroughAttribute name="autocomplete" value="off"/>
-<!--    <p:defaultCommand target="btnSend" />-->
-    <p:panel header="The Streets">
-
-        <p:panel id="streetView" header="Street View">
-
-            <h:panelGroup id="chatContentDiv" layout="block">
-
-            </h:panelGroup>
-
-            <h:form id="chatForm" prependId="false">
-
-                <p:inputText id="chatInputText" value="#{streetsBean.userCommand}" size="50" />
-                <p:commandButton value="Send" id="btnSend" async="true" actionListener="#{streetsBean.sendCommand}"
-                                 update="@form" styleClass="rightAlign" icon="ui-icon-circle-arrow-e"/>
-
-            </h:form>
-
-        </p:panel>
-
+    <p:panel id="streetsView" style="width: 48%; overflow: hidden; float: right" header="Streets View">
+        <ul style="list-style: none; text-align: left; height: 300px; overflow: scroll; padding: 17px; box-sizing: content-box" id="streetsMessages"/>
     </p:panel>
-    <br/>
+    <p:panel id="privateView" style="width: 48%; overflow: hidden; float: left" header="Private View">
+        <ul style="list-style: none; text-align: left; height: 280px; overflow: scroll; padding: 17px; box-sizing: content-box" id="privateMessages"/>
+        <h:form id="chatForm" prependId="false">
+            <f:passThroughAttribute name="autocomplete" value="off"/>
+            <p:defaultCommand target="btnSend" />
+            <p:inputText id="userCommand" value="#{streetsBean.userCommand}" style="width: 75%; float: left" />
+            <p:commandButton value="Send" name="btnSend" id="btnSend" async="true" actionListener="#{streetsBean.sendCommand}"
+                             update="@form" styleClass="rightAlign" icon="ui-icon-circle-arrow-e" style="width: 15%; float: right"/>
+        </h:form>
+
+        <f:websocket channel="streetsChannel" scope="session" onmessage="streetsSocketListener" />
+        <f:websocket channel="privateChannel" scope="session" onmessage="privateSocketListener" user="#{sessionBean.strAuthUser.user.id}" />
+    </p:panel>
+
 </h:form>
-<f:websocket channel="mainChannel" onmessage="socketListener" />
 </html>

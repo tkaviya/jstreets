@@ -25,14 +25,12 @@ public class StrSystemUser implements Serializable {
     protected Long sessionId;
     protected Long authUserId;
     protected Long userId;
-    protected Long walletId;
     protected String firstName;
     protected String lastName;
     protected String username;
     protected String email;
     protected String msisdn;
     protected String phoneNumber;
-    protected Double walletBalance;
     protected String group;
     protected String deviceId;
     protected String authToken;
@@ -46,28 +44,25 @@ public class StrSystemUser implements Serializable {
     }
 
     public StrSystemUser(Long sessionId, str_auth_user symAuthUser, str_user symUser) {
-        this(sessionId, symAuthUser.getId(), symUser.getId(), symUser.getWallet().getId(), symUser.getFirst_name(),
+        this(sessionId, symAuthUser.getId(), symUser.getId(), symUser.getFirst_name(),
                 symUser.getLast_name(), symUser.getUsername(), symUser.getEmail(), symUser.getMsisdn(),
                 format10DigitPhoneNumber(symUser.getMsisdn(), getStrConfigDao().getConfig(CONFIG_DEFAULT_COUNTRY_CODE)),
-                symAuthUser.getUser().getWallet().getCurrent_balance().doubleValue(),
                 symAuthUser.getAuth_group().getName(), symAuthUser.getDevice_id(),
                 symAuthUser.getAuth_token(), symAuthUser.getLast_login_date());
     }
 
-    public StrSystemUser(Long sessionId, Long authUserId, Long userId, Long walletId, String firstName, String lastName,
-                         String username, String email, String msisdn, String phoneNumber, Double walletBalance,
+    public StrSystemUser(Long sessionId, Long authUserId, Long userId, String firstName, String lastName,
+                         String username, String email, String msisdn, String phoneNumber,
                          String group, String deviceId, String authToken, Date lastLoginDate) {
         this.sessionId = sessionId;
         this.authUserId = authUserId;
         this.userId = userId;
-        this.walletId = walletId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.msisdn = msisdn;
-        this.walletBalance = walletBalance;
         this.group = group;
         this.deviceId = deviceId;
         this.authToken = authToken;
@@ -96,14 +91,6 @@ public class StrSystemUser implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Long getWalletId() {
-        return walletId;
-    }
-
-    public void setWalletId(Long walletId) {
-        this.walletId = walletId;
     }
 
     public String getFirstName() {
@@ -153,10 +140,6 @@ public class StrSystemUser implements Serializable {
     public void setMsisdn(String msisdn) {
         this.msisdn = msisdn;
     }
-
-    public Double getWalletBalance() { return walletBalance; }
-
-    public void setWalletBalance(Double walletBalance) { this.walletBalance = walletBalance; }
 
     public String getGroup() {
         return group;

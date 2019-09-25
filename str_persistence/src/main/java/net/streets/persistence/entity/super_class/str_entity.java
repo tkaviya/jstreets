@@ -30,6 +30,7 @@ public abstract class str_entity<E extends str_entity> implements Serializable, 
 
     /* this function is private because we do not want to be
      * able to update an entity id via the program ever */
+    @SuppressWarnings("unchecked")
     private E setId(Long id) {
         this.id = id;
         return (E) this;
@@ -47,6 +48,7 @@ public abstract class str_entity<E extends str_entity> implements Serializable, 
         return DaoManager.getEntityManagerRepo().save(this);
     }
 
+    @SuppressWarnings("unchecked")
     public E refresh() {
         DaoManager.getEntityManagerRepo().refresh(this);
         return (E) this;

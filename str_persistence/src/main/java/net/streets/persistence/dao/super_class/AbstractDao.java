@@ -32,7 +32,7 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
 
     private static EntityManager entityManager;
 
-    Logger LOGGER = Logger.getLogger(this.getClass().getSimpleName());
+    private Logger LOGGER = Logger.getLogger(this.getClass().getSimpleName());
 
     private Class<E> entityClass;
 
@@ -67,6 +67,7 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
     }
 
     @Transactional
+    @SuppressWarnings("unchecked")
     public E saveOrUpdate(str_entity<E> e) {
         LOGGER.info(">Updating entity: " + e.toString());
         getEntityManager().merge(e);
@@ -77,6 +78,7 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
     }
 
     @Transactional
+    @SuppressWarnings("unchecked")
     public E save(str_entity<E> e) {
         LOGGER.info(">Saving new entity to database: " + e.toString());
         getEntityManager().persist(e);
@@ -98,6 +100,7 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
         return getEntityManager().find(getEntityClass(), id);
     }
 
+    @SuppressWarnings("unchecked")
     public List<E> findAll() {
         LOGGER.info(">findAll " + getEntityClass().getSimpleName());
         return getEntityManager().createQuery("SELECT e FROM " + getEntityClass().getSimpleName() + " e").getResultList();
@@ -107,20 +110,22 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
         return findWhere(criterion, -1);
     }
 
+    @SuppressWarnings("unchecked")
     public List<E> findWhere(Pair<String, ?> criteria) {
         List conditions = new ArrayList<Pair<String, Object>>();
         conditions.add(criteria);
         return findWhere(conditions, -1);
     }
 
+    @SuppressWarnings("unchecked")
     public List<E> findWhere(List<Pair<String, ?>> criterion, int maxResults) {
-        String conditions = "";
+        StringBuilder conditions = new StringBuilder();
 
         for (Pair<String, ?> criteria : criterion) {
             if (conditions.length() > 0) {
-                conditions += " AND ";
+                conditions.append(" AND ");
             }
-            conditions += criteria.getLeft() + " = '" + criteria.getRight() + "' ";
+            conditions.append(criteria.getLeft()).append(" = '").append(criteria.getRight()).append("' ");
         }
 
         LOGGER.info(">" + getEntityClass().getSimpleName() + " findWhere " + conditions);
@@ -141,6 +146,6 @@ public abstract class AbstractDao<E extends str_entity, I extends Serializable> 
     }
 
     public <E> StrResponseObject<E> enforceUnique(List<E> list) {
-        return new StrResponseObject<E>(StrResponseCode.SUCCESS, list.get(0));
+        return new StrResponseObject<>(StrResponseCode.SUCCESS, list.get(0));
     }
 }

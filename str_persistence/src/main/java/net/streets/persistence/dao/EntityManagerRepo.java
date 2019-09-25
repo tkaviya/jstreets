@@ -324,14 +324,11 @@ public class EntityManagerRepo {
         return findLast(entityClass, criterion, false, false, true);
     }
 
-    public <E extends str_entity> StrResponseObject<E> findUniqueWhere(
-		    Class<E> entityClass, List<Pair<String, ?>> criteria) {
-        return enforceUnique(findWhere(entityClass, criteria, UNLIMITED_RESULTS,
-                false, false, false, false));
+    public <E extends str_entity> StrResponseObject<E> findUniqueWhere(Class<E> entityClass, List<Pair<String, ?>> criteria) {
+        return enforceUnique(findWhere(entityClass, criteria, UNLIMITED_RESULTS, false, false, false, false));
     }
 
-    public <E extends str_entity> StrResponseObject<E> findUniqueWhere(
-		    Class<E> entityClass, Pair<String, ?> criterion) {
+    public <E extends str_entity> StrResponseObject<E> findUniqueWhere(Class<E> entityClass, Pair<String, ?> criterion) {
         return enforceUnique(findWhere(entityClass, criterion, UNLIMITED_RESULTS));
     }
 

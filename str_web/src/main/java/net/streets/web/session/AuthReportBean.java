@@ -1,12 +1,11 @@
 package net.streets.web.session;
 
 import net.streets.common.structure.Pair;
-import net.streets.persistence.entity.complex_type.log.str_request_response_log;
+import net.streets.persistence.entity.complex_type.log.str_session;
 import net.streets.web.common.JSFReportable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Named;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -21,28 +20,26 @@ import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
  *                                                                         *
  ***************************************************************************/
 
-@Named
 @Component
 @Scope("session")
-public class SystemReportBean extends JSFReportable {
+public class AuthReportBean extends JSFReportable {
 
-    private static final String TABLE_NAME = "System Logs";
-    private List<str_request_response_log> systemLogs;
+    private static final String TABLE_NAME = "Authentications";
+    private List<str_session> sessions;
 
-    public SystemReportBean(){}
-
-    public void initializeSystemLogs() {
-        systemLogs = getEntityManagerRepo().findWhere(str_request_response_log.class, asList(
-                new Pair<>("incoming_request_time >", dateToString(reportStartDate)),
-                new Pair<>("incoming_request_time <", dateToString(reportEndDate))
+    public void initializeSessions() {
+        sessions = getEntityManagerRepo().findWhere(str_session.class, asList(
+                new Pair<>("start_time >", dateToString(reportStartDate)),
+                new Pair<>("start_time <", dateToString(reportEndDate))
         ), true, false, false, true);
     }
 
-    public List<str_request_response_log> getSystemLogs() {
-        initializeSystemLogs();
-        return systemLogs;
+    public List<str_session> getSessions() {
+        initializeSessions();
+        return sessions;
     }
 
+    @Override
     public String getTableDescription() {
         return TABLE_NAME;
     }

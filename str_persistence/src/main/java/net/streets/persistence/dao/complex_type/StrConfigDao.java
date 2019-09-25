@@ -2,6 +2,7 @@ package net.streets.persistence.dao.complex_type;
 
 import net.streets.persistence.dao.super_class.StreetsEnumEntityDao;
 import net.streets.persistence.entity.enumeration.str_config;
+import net.streets.persistence.enumeration.StrConfig;
 
 import java.util.HashMap;
 
@@ -15,5 +16,5 @@ import java.util.HashMap;
 
 public interface StrConfigDao extends StreetsEnumEntityDao<str_config, Long> {
     HashMap<String, String> getAllConfigs();
-    String getConfig(String configName);
+    String getConfig(StrConfig strConfig);
 }

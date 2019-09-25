@@ -38,7 +38,6 @@ import static net.streets.persistence.helper.StrEnumHelper.fromEnum;
  *                                                                         *
  ***************************************************************************/
 
-@ManagedBean
 public abstract class JSFUpdatable extends JSFExportable implements JSFLoggable, Serializable {
 
     private static final Logger logger = Logger.getLogger(JSFUpdatable.class.getSimpleName());

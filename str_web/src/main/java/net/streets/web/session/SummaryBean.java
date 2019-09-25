@@ -5,6 +5,7 @@ import net.streets.web.common.JSFReportable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Named;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ import static net.streets.persistence.helper.DaoManager.getEntityManagerRepo;
  *                                                                         *
  ***************************************************************************/
 
+@Named
 @Component
 @Scope("session")
 public class SummaryBean extends JSFReportable {
@@ -27,6 +29,8 @@ public class SummaryBean extends JSFReportable {
     private static final Logger logger = Logger.getLogger(SummaryBean.class.getSimpleName());
     private static final String TABLE_NAME = "System Status";
     private String todayStartTime = null;
+
+    public SummaryBean(){}
 
     private String getTodayStartTime() {
         if (todayStartTime == null) {

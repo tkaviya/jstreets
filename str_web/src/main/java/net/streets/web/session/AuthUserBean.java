@@ -1,6 +1,6 @@
 package net.streets.web.session;
 
-import net.streets.authentication.MobileAuthenticationProvider;
+import net.streets.authentication.WebAuthenticationProvider;
 import net.streets.persistence.entity.complex_type.log.str_request_response_log;
 import net.streets.persistence.entity.complex_type.str_auth_user;
 import net.streets.web.common.JSFUpdatable;
@@ -89,7 +89,7 @@ public class AuthUserBean extends JSFUpdatable {
         var pinChangeLog = new str_request_response_log(fromEnum(WEB), fromEnum(USER_PIN_RESET),
             format("Reset pin for %s", selectedAuthUser.getUser().getUsername())).save();
 
-        var authenticationProvider = new MobileAuthenticationProvider(pinChangeLog,
+        var authenticationProvider = new WebAuthenticationProvider(pinChangeLog,
             selectedAuthUser.getDevice_id(), selectedAuthUser.getUser().getUsername(), null);
 
         var pinResponse = authenticationProvider.
